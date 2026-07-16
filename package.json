@@ -27,7 +27,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "echo 'Static deployment' && exit 0",
+    "build": "vite build",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
