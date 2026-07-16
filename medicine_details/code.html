@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medicine Details - CareConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Atkinson+Hyperlegible+Next:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#002109",
+                      "background": "#f8f9ff",
+                      "inverse-primary": "#b4c5ff",
+                      "tertiary-container": "#007f36",
+                      "on-secondary-container": "#006f66",
+                      "primary-fixed": "#dbe1ff",
+                      "on-primary-fixed": "#00174b",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#005320",
+                      "surface-bright": "#f8f9ff",
+                      "secondary": "#006a61",
+                      "surface-container-low": "#eff4ff",
+                      "surface": "#f8f9ff",
+                      "surface-container-high": "#dce9ff",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "on-surface": "#0b1c30",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary-container": "#c7ffca",
+                      "inverse-surface": "#213145",
+                      "error": "#ba1a1a",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "secondary-fixed": "#89f5e7",
+                      "primary-container": "#2563eb",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-tertiary": "#ffffff",
+                      "inverse-on-surface": "#eaf1ff",
+                      "surface-variant": "#d3e4fe",
+                      "outline": "#737686",
+                      "primary": "#004ac6",
+                      "outline-variant": "#c3c6d7",
+                      "on-background": "#0b1c30",
+                      "on-error-container": "#93000a",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed": "#7ffc97",
+                      "surface-dim": "#cbdbf5",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-primary-container": "#eeefff",
+                      "on-secondary-fixed-variant": "#005049",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#86f2e4",
+                      "surface-tint": "#0053db",
+                      "tertiary-fixed-dim": "#62df7d",
+                      "tertiary": "#006329",
+                      "surface-container": "#e5eeff",
+                      "on-secondary-fixed": "#00201d",
+                      "on-surface-variant": "#434655"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "3xl": "64px",
+                      "gutter": "24px",
+                      "unit": "4px",
+                      "2xl": "48px",
+                      "xs": "4px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "container-max": "1280px"
+              },
+              "fontFamily": {
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "title-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-safe">
+<!-- TopAppBar -->
+<header class="w-full top-0 border-b border-outline-variant dark:border-outline shadow-sm bg-surface dark:bg-surface-container-low sticky z-40">
+<div class="flex justify-between items-center px-lg h-16 w-full max-w-container-max mx-auto">
+<button onclick="location.href='../medication_list/code.html'" aria-label="Back" class="text-primary dark:text-primary-fixed hover:bg-surface-container-high transition-colors p-2 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary dark:text-primary-fixed truncate px-4">CareConnect</h1>
+<div class="w-10"></div> <!-- Placeholder for balance -->
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-md md:px-gutter py-lg flex flex-col gap-lg">
+<!-- Header Section (Bento style card) -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-lg flex flex-col md:flex-row items-start md:items-center gap-lg">
+<div class="w-20 h-20 bg-primary-container rounded-full flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-4xl text-on-primary-container" data-icon="pill">pill</span>
+</div>
+<div class="flex-grow">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Lisinopril</h2>
+<p class="font-title-md text-title-md text-on-surface-variant">10mg Oral Tablet</p>
+</div>
+</section>
+<!-- Details Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Instructions Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-surface-container-high">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<h3 class="font-title-md text-title-md">Instructions</h3>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface">Take one tablet by mouth daily with food.</p>
+</section>
+<!-- Prescription Details Card -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant p-md">
+<div class="flex items-center gap-sm mb-md pb-sm border-b border-surface-container-high">
+<span class="material-symbols-outlined text-secondary" data-icon="receipt_long">receipt_long</span>
+<h3 class="font-title-md text-title-md">Prescription Details</h3>
+</div>
+<div class="space-y-sm">
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Prescribed by</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Dr. Mark Wilson</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="font-body-md text-body-md text-on-surface-variant">Refills Remaining</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">3</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Warning Section -->
+<section class="bg-error-container rounded-xl shadow-sm border border-error p-md">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-error" data-icon="warning">warning</span>
+<h3 class="font-title-md text-title-md text-on-error-container">Side Effects Warning</h3>
+</div>
+<p class="font-body-md text-body-md text-on-error-container">
+                Common side effects may include dizziness, cough, or headache. If you experience swelling of the face, lips, tongue, or throat, seek immediate medical attention.
+            </p>
+</section>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-md mt-sm">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md rounded-lg py-3 px-4 flex items-center justify-center gap-sm hover:bg-surface-tint transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="alarm_add">alarm_add</span>
+                Set Reminders
+            </button>
+<button class="flex-1 border-2 border-primary text-primary font-label-md text-label-md rounded-lg py-3 px-4 flex items-center justify-center gap-sm hover:bg-surface-container-high transition-colors active:scale-95">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+                Edit Details
+            </button>
+</div>
+</main>
+</body></html>

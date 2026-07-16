@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareConnect - Notifications</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Atkinson Hyperlegible Next -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#005320",
+                        "on-secondary-fixed-variant": "#005049",
+                        "surface": "#f8f9ff",
+                        "on-surface": "#0b1c30",
+                        "tertiary-fixed": "#7ffc97",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed": "#00201d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#c7ffca",
+                        "on-primary-fixed": "#00174b",
+                        "surface-dim": "#cbdbf5",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "inverse-surface": "#213145",
+                        "surface-container": "#e5eeff",
+                        "on-tertiary-fixed": "#002109",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#006f66",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#eff4ff",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "tertiary": "#006329",
+                        "surface-tint": "#0053db",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-surface-variant": "#434655",
+                        "secondary": "#006a61",
+                        "secondary-container": "#86f2e4",
+                        "outline": "#737686",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "background": "#f8f9ff",
+                        "tertiary-container": "#007f36",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-background": "#0b1c30",
+                        "on-primary-container": "#eeefff",
+                        "primary-container": "#2563eb",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#dce9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "unit": "4px",
+                        "2xl": "48px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Atkinson Hyperlegible Next"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Atkinson Hyperlegible Next"],
+                        "display-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- Navigation Drawer (Hidden by default, structure provided) -->
+<aside class="fixed inset-y-0 left-0 z-[60] flex flex-col p-4 h-full w-80 bg-surface border-r border-outline-variant shadow-xl transition-all duration-300 ease-in-out -translate-x-full md:translate-x-0" id="nav-drawer">
+<div class="flex items-center gap-md mb-lg">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a mature healthcare caregiver, wearing a neat uniform, looking warm and approachable. High quality photography, well lit, against a neutral soft medical background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOitb7nCztVXPMTbgL4NJBm5wYV1agoAuM0o-vKpRU0wTUfMw69HYQUFTz8kSOjb25EaAHcnkufKaundq8yR2UgSGMBa9SLUNW92Z-_gAJcUnlXH3ETeJPiXwjobQBKP1pWMCHJCdFeykMpsj5-zFbBdj-UlJcX3VpVkQpEUuyexbltXFNLVIlbjJamCcqw0365LNaPA158rfN-fwXfsHW7IaPT-N7-OuMwhYv1EktdPukoPzsMq1U"/>
+<div>
+<div class="font-title-md text-title-md text-primary">Alex Johnson</div>
+<div class="font-label-sm text-label-sm text-on-surface-variant">Primary Caregiver • Verified Account</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-sm">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out font-body-md text-body-md rounded-r-full" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+                Medical Records
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out font-body-md text-body-md rounded-r-full" href="#">
+<span class="material-symbols-outlined">group</span>
+                Care Team
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out font-body-md text-body-md rounded-r-full" href="#">
+<span class="material-symbols-outlined">contact_emergency</span>
+                Emergency Contacts
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out font-body-md text-body-md rounded-r-full" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                Insurance
+            </a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out font-body-md text-body-md rounded-r-full" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+                Support
+            </a>
+</nav>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-gutter h-16 bg-surface text-primary font-title-md text-title-md border-b border-outline-variant transition-colors duration-200 md:pl-[344px]">
+<div class="flex items-center gap-md">
+<button class="md:hidden p-2 rounded-full hover:bg-surface-container-low transition-colors duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">CareConnect</span>
+</div>
+<div class="flex items-center gap-sm">
+<img class="w-8 h-8 rounded-full border border-outline-variant object-cover" data-alt="A small circular avatar placeholder image showing a silhouette of a generic user profile against a light blue background. Minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFAaIZti-AgAmHyM1tpU3JB07-Yc5OSmA7rz2k9fHzg2Cb0EVK6HlUqrd6w8ohkylrVvuuzVP-T7LC7uL6zykLMB9X2--hMW83uJETsJIrgS4l7JbftmJY4xYg7oRFMconHQjVEa2EDHE97vAon03DmGXBaeS1J1kpYrA5YGodydrbW5dnIewaXakgWYnfkyyHeM-ZQ-OLQfr8KSzeVPKsKYeXxnNlqQPl0iB7dgFobQDtHsG-gocT"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 pt-24 pb-32 md:pb-16 px-4 md:px-lg md:ml-80 max-w-container-max mx-auto w-full">
+<div class="flex justify-between items-end mb-lg">
+<h1 class="font-display-lg text-display-lg text-on-background">Alerts</h1>
+<button class="text-primary hover:bg-surface-container-low px-4 py-2 rounded-lg transition-colors font-label-md text-label-md">
+                Mark all as read
+            </button>
+</div>
+<!-- Section: New -->
+<section class="mb-2xl">
+<h2 class="font-title-md text-title-md text-on-surface-variant mb-md px-2">New</h2>
+<div class="flex flex-col gap-sm">
+<!-- Card 1: Medication -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_2px_4px_-1px_rgba(0,0,0,0.05)] flex gap-md items-start hover:shadow-md transition-shadow">
+<div class="bg-primary-container text-on-primary-container p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined">pill</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-title-md text-title-md text-on-background">Medication Reminder</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Just now</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Time for Atorvastatin (20mg). Please take with water.</p>
+<div class="flex gap-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                                View Details
+                            </button>
+<button class="text-primary hover:bg-surface-container-low font-label-md text-label-md px-4 py-2 rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+                                Dismiss
+                            </button>
+</div>
+</div>
+</div>
+<!-- Card 2: Health Alert -->
+<div class="bg-surface-container-lowest border border-error-container rounded-xl p-md shadow-[0_2px_4px_-1px_rgba(0,0,0,0.05)] flex gap-md items-start hover:shadow-md transition-shadow relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-error"></div>
+<div class="bg-error-container text-on-error-container p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined">vital_signs</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-title-md text-title-md text-on-background">Health Alert</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">10 mins ago</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Blood Pressure slightly high (135/85). Monitor closely today.</p>
+<div class="flex gap-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                                View Details
+                            </button>
+<button class="text-primary hover:bg-surface-container-low font-label-md text-label-md px-4 py-2 rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+                                Dismiss
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Earlier -->
+<section>
+<h2 class="font-title-md text-title-md text-on-surface-variant mb-md px-2">Earlier</h2>
+<div class="flex flex-col gap-sm">
+<!-- Card 3: Caregiver Note -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md shadow-[0_2px_4px_-1px_rgba(0,0,0,0.05)] flex gap-md items-start hover:shadow-md transition-shadow opacity-80">
+<div class="bg-secondary-container text-on-secondary-container p-3 rounded-full flex-shrink-0">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-xs">
+<h3 class="font-title-md text-title-md text-on-background">Caregiver Note</h3>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Yesterday, 4:30 PM</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-md">Alex checked your timeline and reviewed your recent physical therapy session notes.</p>
+<div class="flex gap-sm">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                                View Details
+                            </button>
+<button class="text-primary hover:bg-surface-container-low font-label-md text-label-md px-4 py-2 rounded-lg transition-colors border border-transparent hover:border-outline-variant">
+                                Dismiss
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm text-label-sm mt-1">Timeline</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-sm text-label-sm mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

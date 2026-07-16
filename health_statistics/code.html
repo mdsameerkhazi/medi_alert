@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareConnect - Health Vitals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@500&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#002109",
+                        "background": "#f8f9ff",
+                        "inverse-primary": "#b4c5ff",
+                        "tertiary-container": "#007f36",
+                        "on-secondary-container": "#006f66",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary-fixed": "#00174b",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "surface-bright": "#f8f9ff",
+                        "secondary": "#006a61",
+                        "surface-container-low": "#eff4ff",
+                        "surface": "#f8f9ff",
+                        "surface-container-high": "#dce9ff",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-surface": "#0b1c30",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-container": "#c7ffca",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#89f5e7",
+                        "primary-container": "#2563eb",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary": "#ffffff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "surface-variant": "#d3e4fe",
+                        "outline": "#737686",
+                        "primary": "#004ac6",
+                        "outline-variant": "#c3c6d7",
+                        "on-background": "#0b1c30",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#7ffc97",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-container": "#eeefff",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#86f2e4",
+                        "surface-tint": "#0053db",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "tertiary": "#006329",
+                        "surface-container": "#e5eeff",
+                        "on-secondary-fixed": "#00201d",
+                        "on-surface-variant": "#434655"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "3xl": "64px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "2xl": "48px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Atkinson Hyperlegible Next"],
+                        "body-lg": ["Inter"],
+                        "title-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Atkinson Hyperlegible Next"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Ambient Backgrounds */
+        .ambient-glow {
+            position: absolute;
+            width: 150vw;
+            height: 150vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--tw-color-surface-container-high) 0%, rgba(255,255,255,0) 70%);
+            top: -50vw;
+            left: -25vw;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        
+        /* Metric Chart Styles */
+        .chart-line {
+            stroke: var(--tw-color-primary);
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0px 4px 6px rgba(0, 74, 198, 0.2));
+        }
+        .chart-area {
+            fill: url(#chart-gradient);
+            opacity: 0.3;
+        }
+        .chart-grid {
+            stroke: var(--tw-color-outline-variant);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+        }
+        .chart-point {
+            fill: var(--tw-color-surface);
+            stroke: var(--tw-color-primary);
+            stroke-width: 2;
+        }
+        
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--tw-color-outline-variant);
+        }
+
+        /* Responsive Nav Hide */
+        @media (min-width: 768px) {
+            .mobile-only-nav { display: none !important; }
+        }
+        @media (max-width: 767px) {
+            .desktop-only-nav { display: none !important; }
+        }
+        
+        /* Safe area padding for mobile bottom nav */
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen relative overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<div class="ambient-glow"></div>
+<!-- Main Content Canvas -->
+<main class="w-full max-w-container-max mx-auto px-md md:px-gutter py-lg pb-12">
+<!-- Page Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-md mb-lg">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-xs">Health Vitals</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Monitor your daily health metrics and trends.</p>
+</div>
+<div class="flex items-center gap-sm w-full md:w-auto">
+  <button onclick="toggleVitalsModal()" class="flex-1 md:flex-none bg-primary text-on-primary font-label-md text-label-md px-lg py-3 rounded-lg flex items-center justify-center gap-sm hover:bg-primary/95 active:scale-95 transition-all shadow-md">
+    <span class="material-symbols-outlined">add</span>
+    Log Vitals
+  </button>
+  <button aria-label="Sync Data" onclick="showToast('Data synced with database')" class="flex-1 md:flex-none border border-outline text-on-surface-variant font-label-md text-label-md px-lg py-3 rounded-lg flex items-center justify-center gap-sm hover:bg-surface-container-high active:scale-95 transition-all shadow-sm">
+    <span class="material-symbols-outlined">sync</span>
+    Sync Data
+  </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-md md:gap-lg">
+<!-- Primary Detailed Metric: Heart Rate (Spans 8 cols on desktop) -->
+<section class="md:col-span-8 glass-card rounded-xl shadow-sm p-lg flex flex-col relative overflow-hidden">
+<!-- Header -->
+<div class="flex justify-between items-center mb-lg relative z-10">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-full bg-error-container text-on-error-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+</div>
+<div>
+<h3 class="font-title-md text-title-md text-on-surface">Heart Rate</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Last 7 Days</p>
+</div>
+</div>
+<div class="text-right">
+<div class="font-display-lg text-display-lg text-primary flex items-baseline gap-xs">
+                            74 <span class="font-label-md text-label-md text-on-surface-variant">bpm</span>
+</div>
+<p class="font-label-sm text-label-sm text-tertiary flex items-center justify-end gap-xs">
+<span class="material-symbols-outlined text-sm">trending_down</span> -2 bpm avg
+                        </p>
+</div>
+</div>
+<!-- Chart Area (SVG) -->
+<div class="flex-grow w-full h-48 md:h-64 mt-md relative z-10">
+<svg class="w-full h-full preserve-aspect-ratio-none" viewbox="0 0 500 200">
+<defs>
+<lineargradient id="chart-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="var(--tw-color-primary)" stop-opacity="0.4"></stop>
+<stop offset="100%" stop-color="var(--tw-color-primary)" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Grid Lines -->
+<line class="chart-grid" x1="0" x2="500" y1="160" y2="160"></line>
+<line class="chart-grid" x1="0" x2="500" y1="120" y2="120"></line>
+<line class="chart-grid" x1="0" x2="500" y1="80" y2="80"></line>
+<line class="chart-grid" x1="0" x2="500" y1="40" y2="40"></line>
+<!-- Area Fill -->
+<polygon class="chart-area" points="0,200 0,110 83,130 166,90 250,140 333,70 416,100 500,80 500,200"></polygon>
+<!-- Line -->
+<polyline class="chart-line" points="0,110 83,130 166,90 250,140 333,70 416,100 500,80"></polyline>
+<!-- Data Points -->
+<circle class="chart-point" cx="83" cy="130" r="4"></circle>
+<circle class="chart-point" cx="166" cy="90" r="4"></circle>
+<circle class="chart-point" cx="250" cy="140" r="4"></circle>
+<circle class="chart-point" cx="333" cy="70" r="4"></circle>
+<circle class="chart-point" cx="416" cy="100" r="4"></circle>
+<circle class="chart-point" cx="500" cy="80" r="4"></circle>
+</svg>
+<!-- X-Axis Labels -->
+<div class="flex justify-between w-full mt-2 font-label-sm text-label-sm text-on-surface-variant px-2">
+<span>Mon</span>
+<span>Tue</span>
+<span>Wed</span>
+<span>Thu</span>
+<span>Fri</span>
+<span>Sat</span>
+<span>Sun</span>
+</div>
+</div>
+<!-- Key Stats Bar -->
+<div class="grid grid-cols-3 gap-md mt-lg pt-md border-t border-outline-variant relative z-10">
+<div class="text-center md:text-left">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Average</p>
+<p class="font-title-md text-title-md text-on-surface">74 bpm</p>
+</div>
+<div class="text-center md:text-left border-l border-outline-variant pl-md md:pl-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Max</p>
+<p class="font-title-md text-title-md text-on-surface">102 bpm</p>
+</div>
+<div class="text-center md:text-left border-l border-outline-variant pl-md md:pl-lg">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-xs">Min</p>
+<p class="font-title-md text-title-md text-on-surface">62 bpm</p>
+</div>
+</div>
+</section>
+<!-- Secondary Metrics (Spans 4 cols on desktop) -->
+<div class="md:col-span-4 flex flex-col gap-md md:gap-lg">
+<!-- Blood Pressure Card -->
+<button class="w-full text-left bg-surface rounded-xl shadow-sm border border-outline-variant p-lg hover:shadow-md hover:border-primary transition-all group focus:outline-none focus:ring-2 focus:ring-primary active:scale-[0.98]">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-primary flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors">
+<span class="material-symbols-outlined text-xl">vital_signs</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Blood Pressure</h3>
+<div class="flex items-end gap-sm mb-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">120/80</span>
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">mmHg</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 mt-md overflow-hidden">
+<div class="bg-tertiary h-2 rounded-full" style="width: 60%;"></div>
+</div>
+<p class="font-label-sm text-label-sm text-tertiary mt-sm">Normal range</p>
+</button>
+<!-- Steps Card -->
+<button class="w-full text-left bg-surface rounded-xl shadow-sm border border-outline-variant p-lg hover:shadow-md hover:border-primary transition-all group focus:outline-none focus:ring-2 focus:ring-primary active:scale-[0.98]">
+<div class="flex justify-between items-start mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-xl">directions_walk</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">open_in_full</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-xs">Steps</h3>
+<div class="flex items-end gap-sm mb-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface">8,432</span>
+<span class="font-label-md text-label-md text-on-surface-variant mb-1">/ 10k</span>
+</div>
+<div class="w-full bg-surface-container-high rounded-full h-2 mt-md overflow-hidden">
+<div class="bg-secondary h-2 rounded-full" style="width: 84%;"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-sm">1,568 to goal</p>
+</button>
+</div>
+</div>
+</main>
+
+<!-- Log Vitals Modal -->
+<div id="vitals-modal" class="fixed inset-0 bg-black/50 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+  <div class="bg-surface max-w-md w-full mx-4 rounded-2xl shadow-xl border border-outline-variant overflow-hidden transform translate-y-4 transition-all duration-300">
+    <div class="bg-primary text-on-primary p-md flex items-center justify-between">
+      <h3 class="font-title-md text-title-md flex items-center gap-sm">
+        <span class="material-symbols-outlined">add_circle</span>
+        Log Today's Vitals
+      </h3>
+      <button onclick="toggleVitalsModal()" class="text-on-primary hover:opacity-85 active:scale-95 transition-transform">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <form id="vitals-form" class="p-md space-y-md" onsubmit="submitVitalsForm(event)">
+      <div>
+        <label class="block font-label-md text-label-md text-on-surface mb-xs" for="vitals-heart">Heart Rate (BPM)</label>
+        <input type="number" id="vitals-heart" class="w-full px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface outline-none focus:border-primary" placeholder="e.g. 72" required>
+      </div>
+      <div class="grid grid-cols-2 gap-sm">
+        <div>
+          <label class="block font-label-md text-label-md text-on-surface mb-xs" for="vitals-sys">BP Systolic (mmHg)</label>
+          <input type="number" id="vitals-sys" class="w-full px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface outline-none focus:border-primary" placeholder="e.g. 120" required>
+        </div>
+        <div>
+          <label class="block font-label-md text-label-md text-on-surface mb-xs" for="vitals-dia">BP Diastolic (mmHg)</label>
+          <input type="number" id="vitals-dia" class="w-full px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface outline-none focus:border-primary" placeholder="e.g. 80" required>
+        </div>
+      </div>
+      <div>
+        <label class="block font-label-md text-label-md text-on-surface mb-xs" for="vitals-sleep">Sleep Hours</label>
+        <input type="number" step="0.1" id="vitals-sleep" class="w-full px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface outline-none focus:border-primary" placeholder="e.g. 7.5" required>
+      </div>
+      <div>
+        <label class="block font-label-md text-label-md text-on-surface mb-xs" for="vitals-steps">Daily Steps</label>
+        <input type="number" id="vitals-steps" class="w-full px-md py-sm bg-surface-container border border-outline-variant rounded-lg font-body-md text-body-md text-on-surface outline-none focus:border-primary" placeholder="e.g. 8000" required>
+      </div>
+      
+      <button type="submit" class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md text-label-md shadow-md hover:bg-primary/95 active:scale-95 transition-all">
+        Save Logs
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-xl shadow-lg font-body-md text-body-md opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+  Vitals logged successfully!
+</div>
+
+<script>
+  function toggleVitalsModal() {
+    const modal = document.getElementById('vitals-modal');
+    const inner = modal.querySelector('.bg-surface');
+    const isOpen = modal.classList.contains('opacity-0');
+    if (isOpen) {
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      inner.classList.remove('translate-y-4');
+    } else {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      inner.classList.add('translate-y-4');
+    }
+  }
+
+  function submitVitalsForm(e) {
+    e.preventDefault();
+    
+    const heart = document.getElementById('vitals-heart').value;
+    const sys = document.getElementById('vitals-sys').value;
+    const dia = document.getElementById('vitals-dia').value;
+    const sleep = document.getElementById('vitals-sleep').value;
+    const steps = document.getElementById('vitals-steps').value;
+
+    // Simple card value updates:
+    // Heart rate, blood pressure, sleep, and steps values in the UI:
+    const values = document.querySelectorAll('.font-headline-lg, .font-display-lg');
+    if (values.length >= 4) {
+      values[0].textContent = heart; // Heart Rate value inside HR card
+      values[1].textContent = sys + '/' + dia; // Blood Pressure value inside BP card
+      values[2].textContent = sleep + 'h'; // Sleep value inside Sleep card
+      values[3].textContent = parseInt(steps).toLocaleString(); // Steps value inside Steps card
+    }
+
+    // Add a Notification event to parent explorer
+    if (window.parent && window.parent.loadNotifications) {
+      const notifs = JSON.parse(localStorage.getItem('notifications')) || [];
+      notifs.unshift({
+        id: Date.now(),
+        title: "Vitals Logged",
+        message: `Logged: HR ${heart} BPM, BP ${sys}/${dia} mmHg, Sleep ${sleep}h, Steps ${steps}.`,
+        is_read: false,
+        created_at: new Date().toISOString()
+      });
+      localStorage.setItem('notifications', JSON.stringify(notifs));
+      window.parent.loadNotifications();
+    }
+
+    showToast('Vitals logged and synchronized!');
+    toggleVitalsModal();
+    document.getElementById('vitals-form').reset();
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('opacity-0');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0');
+    }, 2500);
+  }
+</script>
+</body></html>

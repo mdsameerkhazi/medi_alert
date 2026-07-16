@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareConnect - Verify Email</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#eeefff",
+                        "on-surface-variant": "#434655",
+                        "primary": "#004ac6",
+                        "surface-container": "#e5eeff",
+                        "on-secondary-fixed": "#00201d",
+                        "tertiary-container": "#007f36",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "surface-dim": "#cbdbf5",
+                        "primary-fixed": "#dbe1ff",
+                        "on-surface": "#0b1c30",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#006329",
+                        "outline-variant": "#c3c6d7",
+                        "surface-variant": "#d3e4fe",
+                        "on-secondary-fixed-variant": "#005049",
+                        "tertiary-fixed": "#7ffc97",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "surface": "#f8f9ff",
+                        "outline": "#737686",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed": "#002109",
+                        "primary-container": "#2563eb",
+                        "on-tertiary-container": "#c7ffca",
+                        "inverse-surface": "#213145",
+                        "surface-tint": "#0053db",
+                        "surface-container-high": "#dce9ff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-container": "#006f66",
+                        "secondary-container": "#86f2e4",
+                        "background": "#f8f9ff",
+                        "inverse-primary": "#b4c5ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "secondary": "#006a61",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "on-background": "#0b1c30",
+                        "on-primary-fixed": "#00174b",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "unit": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "3xl": "64px",
+                        "md": "16px",
+                        "sm": "8px",
+                        "xs": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Atkinson Hyperlegible Next"],
+                        "title-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-md": ["Atkinson Hyperlegible Next"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        /* Custom styles for OTP inputs to hide number arrows and handle focus better */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background h-full flex flex-col font-body-md text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col justify-center px-gutter w-full max-w-container-max mx-auto py-3xl">
+<div class="max-w-md mx-auto w-full">
+<!-- Back Action -->
+<button aria-label="Go back" class="mb-xl flex items-center justify-center w-10 h-10 rounded-full hover:bg-surface-variant text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<!-- Header Section -->
+<div class="mb-2xl">
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-sm">Verify Email</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                    We've sent a 6-digit verification code to <span class="font-bold text-on-background">j***@example.com</span>. Please enter it below.
+                </p>
+</div>
+<!-- OTP Input Form -->
+<form class="space-y-xl" id="otp-form">
+<!-- OTP Input Grid -->
+<div class="flex justify-between gap-sm" id="otp-container">
+<input aria-label="Digit 1" autofocus="" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input aria-label="Digit 2" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input aria-label="Digit 3" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input aria-label="Digit 4" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input aria-label="Digit 5" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+<input aria-label="Digit 6" class="w-12 h-14 md:w-14 md:h-16 text-center font-title-md text-title-md bg-surface-container-lowest border border-outline-variant rounded-lg text-on-background focus:border-primary focus:ring-2 focus:ring-primary-fixed outline-none transition-all" inputmode="numeric" maxlength="1" pattern="[0-9]*" type="number"/>
+</div>
+<!-- Error Message (Hidden by default) -->
+<div class="hidden flex items-center gap-sm text-error bg-error-container/50 p-sm rounded-md" id="error-message">
+<span class="material-symbols-outlined text-sm">error</span>
+<span class="font-label-md text-label-md text-on-error-container">Invalid code. Please try again.</span>
+</div>
+<!-- Resend Action -->
+<div class="text-center">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Didn't receive the code? 
+                        <button class="font-label-md text-label-md font-bold text-primary hover:text-primary-container disabled:text-outline disabled:cursor-not-allowed transition-colors ml-1" disabled="" id="resend-btn" type="button">
+                            Resend in <span id="timer">00:30</span>
+</button>
+</p>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full bg-primary hover:bg-surface-tint text-on-primary font-title-md text-title-md py-md rounded-lg shadow-sm active:scale-[0.98] transition-all flex justify-center items-center gap-sm" type="submit">
+                    Verify
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</form>
+<!-- Success Overlay (Hidden by default, shown via JS for demo) -->
+<div class="hidden fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-gutter" id="success-overlay">
+<div class="bg-surface-container-lowest p-2xl rounded-xl shadow-lg text-center max-w-sm w-full border border-outline-variant">
+<div class="w-16 h-16 bg-tertiary-container text-on-tertiary-container rounded-full flex items-center justify-center mx-auto mb-lg">
+<span class="material-symbols-outlined text-[32px]" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+</div>
+<h2 class="font-title-md text-title-md text-on-background mb-sm">Email Verified!</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl">Your account is now secure. Redirecting to dashboard...</p>
+<div class="w-full h-1 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-primary animate-[pulse_2s_ease-in-out_infinite] w-1/2 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('#otp-container input');
+            const form = document.getElementById('otp-form');
+            const timerSpan = document.getElementById('timer');
+            const resendBtn = document.getElementById('resend-btn');
+            const errorMsg = document.getElementById('error-message');
+            const successOverlay = document.getElementById('success-overlay');
+
+            // Timer Logic
+            let timeLeft = 30;
+            let timerId;
+
+            function startTimer() {
+                clearInterval(timerId);
+                timeLeft = 30;
+                resendBtn.disabled = true;
+                timerSpan.textContent = `00:${timeLeft}`;
+                
+                timerId = setInterval(() => {
+                    timeLeft--;
+                    let seconds = timeLeft < 10 ? `0${timeLeft}` : timeLeft;
+                    timerSpan.textContent = `00:${seconds}`;
+                    
+                    if (timeLeft <= 0) {
+                        clearInterval(timerId);
+                        resendBtn.disabled = false;
+                        resendBtn.innerHTML = 'Resend Code';
+                    }
+                }, 1000);
+            }
+
+            startTimer();
+
+            resendBtn.addEventListener('click', () => {
+                if (!resendBtn.disabled) {
+                    resendBtn.innerHTML = `Resend in <span id="timer">00:30</span>`;
+                    // Re-grab the timer span as it was overwritten
+                    const newTimerSpan = document.getElementById('timer');
+                    startTimer();
+                    // Simulate resending logic here
+                    errorMsg.classList.add('hidden');
+                    inputs.forEach(input => {
+                        input.value = '';
+                        input.classList.remove('border-error', 'text-error');
+                    });
+                    inputs[0].focus();
+                }
+            });
+
+            // OTP Input Logic
+            inputs.forEach((input, index) => {
+                // Focus behavior
+                input.addEventListener('focus', (e) => {
+                    e.target.select();
+                });
+
+                // Input handling
+                input.addEventListener('input', (e) => {
+                    errorMsg.classList.add('hidden');
+                    inputs.forEach(i => i.classList.remove('border-error', 'text-error'));
+
+                    // Handle paste if multiple digits are entered in one box
+                    if(e.target.value.length > 1) {
+                        let pastedValue = e.target.value.substring(0, inputs.length).replace(/\D/g, '');
+                        for(let i = 0; i < inputs.length; i++) {
+                            if(i < pastedValue.length) {
+                                inputs[i].value = pastedValue[i];
+                            } else {
+                                inputs[i].value = '';
+                            }
+                        }
+                        let nextEmpty = Array.from(inputs).findIndex(inp => inp.value === '');
+                        if(nextEmpty !== -1) {
+                            inputs[nextEmpty].focus();
+                        } else {
+                            inputs[inputs.length - 1].focus();
+                        }
+                        return;
+                    }
+
+                    // Move to next input
+                    if (e.target.value !== '') {
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    }
+                });
+
+                // Backspace handling
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && e.target.value === '') {
+                        if (index > 0) {
+                            inputs[index - 1].focus();
+                        }
+                    }
+                });
+            });
+
+            // Form Submission Simulation
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const otp = Array.from(inputs).map(i => i.value).join('');
+                
+                if (otp.length < 6) {
+                    // Show error state
+                    errorMsg.classList.remove('hidden');
+                    inputs.forEach(input => {
+                        input.classList.add('border-error', 'text-error');
+                    });
+                } else {
+                    // Simulate Success
+                    errorMsg.classList.add('hidden');
+                    successOverlay.classList.remove('hidden');
+                    
+                    // Simulate redirect after 2 seconds
+                    setTimeout(() => {
+                        alert('Redirecting to dashboard...');
+                        successOverlay.classList.add('hidden');
+                        inputs.forEach(input => input.value = '');
+                        inputs[0].focus();
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body></html>

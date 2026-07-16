@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Theme Settings - CareConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#f8f9ff",
+                      "on-primary": "#ffffff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error-container": "#93000a",
+                      "surface-container-low": "#eff4ff",
+                      "secondary": "#006a61",
+                      "on-primary-container": "#eeefff",
+                      "tertiary-container": "#007f36",
+                      "surface-tint": "#0053db",
+                      "on-surface": "#0b1c30",
+                      "surface-container-high": "#dce9ff",
+                      "on-error": "#ffffff",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-primary-fixed": "#00174b",
+                      "tertiary-fixed": "#7ffc97",
+                      "outline-variant": "#c3c6d7",
+                      "on-secondary-container": "#006f66",
+                      "primary": "#004ac6",
+                      "primary-fixed": "#dbe1ff",
+                      "primary-container": "#2563eb",
+                      "on-tertiary": "#ffffff",
+                      "inverse-surface": "#213145",
+                      "error": "#ba1a1a",
+                      "tertiary": "#006329",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary-fixed": "#002109",
+                      "on-surface-variant": "#434655",
+                      "surface-variant": "#d3e4fe",
+                      "on-tertiary-fixed-variant": "#005320",
+                      "surface-container": "#e5eeff",
+                      "surface-dim": "#cbdbf5",
+                      "on-background": "#0b1c30",
+                      "on-secondary-fixed": "#00201d",
+                      "secondary-fixed": "#89f5e7",
+                      "surface": "#f8f9ff",
+                      "on-tertiary-container": "#c7ffca",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#b4c5ff",
+                      "secondary-container": "#86f2e4",
+                      "outline": "#737686",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "on-secondary-fixed-variant": "#005049",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed-dim": "#62df7d",
+                      "background": "#f8f9ff",
+                      "inverse-on-surface": "#eaf1ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "gutter": "24px",
+                      "sm": "8px",
+                      "md": "16px",
+                      "container-max": "1280px",
+                      "2xl": "48px",
+                      "xl": "32px",
+                      "3xl": "64px",
+                      "xs": "4px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "title-md": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "label-md": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-background shadow-sm z-40">
+<div class="flex items-center justify-between px-md h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-sm">
+<!-- Back Button for generic settings sub-page -->
+<button aria-label="Go back" class="text-on-surface-variant hover:bg-surface-variant p-2 rounded-full transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[24px]">arrow_back</span>
+</button>
+<h1 class="font-title-md text-title-md text-on-surface ml-2">Theme Settings</h1>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-3xl mx-auto px-md py-lg md:py-2xl pb-32 md:pb-lg">
+<section class="mb-xl">
+<p class="font-body-md text-body-md text-on-surface-variant mb-lg">Choose how CareConnect appears. The clinical interface is optimized for both bright and low-light environments.</p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
+<!-- Light Mode Option -->
+<label class="cursor-pointer group">
+<input checked="" class="peer sr-only" name="theme_selection" type="radio" value="light"/>
+<div class="h-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md transition-all duration-200 shadow-sm peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary-fixed peer-hover:border-primary">
+<div class="flex flex-col h-full gap-sm">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="light_mode">light_mode</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px] text-on-primary opacity-0 group-hover:opacity-100 peer-checked:opacity-100 transition-opacity" data-icon="check" data-weight="fill">check</span>
+</div>
+</div>
+<!-- Mini Preview -->
+<div class="w-full h-24 bg-surface-bright border border-outline-variant rounded flex flex-col p-2 gap-2 overflow-hidden">
+<div class="w-full h-3 bg-surface-container-high rounded-full"></div>
+<div class="w-3/4 h-3 bg-primary-fixed rounded-full"></div>
+<div class="mt-auto w-full flex justify-between">
+<div class="w-4 h-4 rounded bg-secondary-container"></div>
+<div class="w-4 h-4 rounded bg-surface-container-high"></div>
+<div class="w-4 h-4 rounded bg-surface-container-high"></div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface mt-2 font-medium">Light</span>
+</div>
+</div>
+</label>
+<!-- Dark Mode Option -->
+<label class="cursor-pointer group">
+<input class="peer sr-only" name="theme_selection" type="radio" value="dark"/>
+<div class="h-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md transition-all duration-200 shadow-sm peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary-fixed peer-hover:border-primary">
+<div class="flex flex-col h-full gap-sm">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="dark_mode">dark_mode</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px] text-on-primary opacity-0 group-hover:opacity-100 peer-checked:opacity-100 transition-opacity" data-icon="check" data-weight="fill">check</span>
+</div>
+</div>
+<!-- Mini Preview Dark -->
+<div class="w-full h-24 bg-[#1e293b] border border-outline-variant rounded flex flex-col p-2 gap-2 overflow-hidden">
+<div class="w-full h-3 bg-[#334155] rounded-full"></div>
+<div class="w-3/4 h-3 bg-primary-fixed-dim rounded-full"></div>
+<div class="mt-auto w-full flex justify-between">
+<div class="w-4 h-4 rounded bg-secondary-fixed"></div>
+<div class="w-4 h-4 rounded bg-[#334155]"></div>
+<div class="w-4 h-4 rounded bg-[#334155]"></div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface mt-2 font-medium">Dark</span>
+</div>
+</div>
+</label>
+<!-- System Mode Option -->
+<label class="cursor-pointer group">
+<input class="peer sr-only" name="theme_selection" type="radio" value="system"/>
+<div class="h-full bg-surface-container-lowest border border-outline-variant rounded-lg p-md transition-all duration-200 shadow-sm peer-checked:border-primary peer-checked:ring-2 peer-checked:ring-primary-fixed peer-hover:border-primary">
+<div class="flex flex-col h-full gap-sm">
+<div class="flex items-center justify-between mb-sm">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="settings_suggest">settings_suggest</span>
+<div class="w-5 h-5 rounded-full border border-outline-variant flex items-center justify-center peer-checked:border-primary peer-checked:bg-primary transition-colors">
+<span class="material-symbols-outlined text-[14px] text-on-primary opacity-0 group-hover:opacity-100 peer-checked:opacity-100 transition-opacity" data-icon="check" data-weight="fill">check</span>
+</div>
+</div>
+<!-- Mini Preview System (Split) -->
+<div class="w-full h-24 rounded flex border border-outline-variant overflow-hidden">
+<div class="w-1/2 h-full bg-surface-bright flex flex-col p-1 gap-1">
+<div class="w-full h-2 bg-surface-container-high rounded-full mt-1"></div>
+<div class="w-3/4 h-2 bg-primary-fixed rounded-full"></div>
+</div>
+<div class="w-1/2 h-full bg-[#1e293b] flex flex-col p-1 gap-1">
+<div class="w-full h-2 bg-[#334155] rounded-full mt-1"></div>
+<div class="w-3/4 h-2 bg-primary-fixed-dim rounded-full"></div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface mt-2 font-medium">System Default</span>
+</div>
+</div>
+</label>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-sm px-1">System default matches your device's active color scheme.</p>
+</section>
+<section class="border-t border-surface-variant pt-lg">
+<div class="flex items-center justify-between bg-surface-container-lowest p-md rounded-lg shadow-sm border border-outline-variant/50">
+<div class="flex items-start gap-md">
+<span class="material-symbols-outlined text-primary mt-1" data-icon="contrast">contrast</span>
+<div>
+<h3 class="font-title-md text-[16px] font-semibold text-on-surface">High Contrast Mode</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Enhance visibility of text and interactive elements. Recommended for clinical environments.</p>
+</div>
+</div>
+<!-- Toggle Switch -->
+<label class="relative inline-flex items-center cursor-pointer ml-sm shrink-0">
+<input class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-outline-variant after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</section>
+</main>
+<script>
+        // Simple script to handle radio selection visual updates on the custom radio buttons
+        const radios = document.querySelectorAll('input[name="theme_selection"]');
+        radios.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                // In a real app, this would trigger a theme change in the DOM/Tailwind class
+                console.log(`Selected theme: ${e.target.value}`);
+            });
+        });
+    </script>
+</body></html>

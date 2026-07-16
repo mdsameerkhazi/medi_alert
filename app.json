@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "CareConnect",
+    "slug": "careconnect-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ]
+  }
+}

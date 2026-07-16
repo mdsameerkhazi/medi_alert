@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caregiver Dashboard - CareConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Atkinson+Hyperlegible+Next:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#005320",
+                      "on-secondary-fixed-variant": "#005049",
+                      "surface": "#f8f9ff",
+                      "on-surface": "#0b1c30",
+                      "tertiary-fixed": "#7ffc97",
+                      "surface-variant": "#d3e4fe",
+                      "on-secondary-fixed": "#00201d",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#c7ffca",
+                      "on-primary-fixed": "#00174b",
+                      "surface-dim": "#cbdbf5",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "inverse-surface": "#213145",
+                      "surface-container": "#e5eeff",
+                      "on-tertiary-fixed": "#002109",
+                      "surface-bright": "#f8f9ff",
+                      "on-secondary-container": "#006f66",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary-fixed-dim": "#62df7d",
+                      "primary": "#004ac6",
+                      "outline-variant": "#c3c6d7",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#eff4ff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#89f5e7",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "tertiary": "#006329",
+                      "surface-tint": "#0053db",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-surface-variant": "#434655",
+                      "secondary": "#006a61",
+                      "secondary-container": "#86f2e4",
+                      "outline": "#737686",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "tertiary-container": "#007f36",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "on-background": "#0b1c30",
+                      "on-primary-container": "#eeefff",
+                      "primary-container": "#2563eb",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dce9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "3xl": "64px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "unit": "4px",
+                      "2xl": "48px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "title-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.02em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-md": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+             font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar Navigation (Desktop) - NavigationDrawer -->
+<aside class="hidden md:flex h-full w-80 fixed left-0 bg-surface border-r border-outline-variant shadow-xl fixed inset-y-0 left-0 z-[60] flex-col p-4">
+<div class="flex items-center space-x-md mb-lg">
+<img alt="Caregiver Profile" class="w-12 h-12 rounded-full object-cover" data-alt="A professional headshot of a female caregiver in a modern, well-lit healthcare setting. She has a warm, reassuring smile. The lighting is bright and clean, emphasizing a clinical yet compassionate mood, fitting a medical professional profile avatar. Light mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARD86QXPAi31Ees0bRVQDPK_P1MtavBqsK_ULgxy9O4aQL2b_gwp32uJIrlEzn2GwDEzT3qGM0BIIKavYS4tF9NxjkHPRswbuEgqRc0nTHdbIJWe-BwhP2exHn_9wp9G8t04hZY2cAFhv3XTJQn1Is4V_w1ftzgwbPmfmpNTML9H9ixfyTyb3VvwSbDkN7bYivyRz2iXQ3EpcFo6UQHmS2sYp6vkSdQCiGIPOGmdL2oVHrboLoVWi4"/>
+<div>
+<h2 class="font-title-md text-title-md text-on-surface">Alex Johnson</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Primary Caregiver</p>
+<p class="font-label-sm text-label-sm text-primary">Verified Account</p>
+</div>
+</div>
+<nav class="space-y-sm flex-1 mt-md">
+<!-- Active Tab -->
+<a class="flex items-center space-x-md p-md bg-secondary-container text-on-secondary-container font-bold rounded-r-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center space-x-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-r-full" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-md text-label-md">Medical Records</span>
+</a>
+<a class="flex items-center space-x-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-r-full" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Care Team</span>
+</a>
+<a class="flex items-center space-x-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-r-full" href="#">
+<span class="material-symbols-outlined" data-icon="contact_emergency">contact_emergency</span>
+<span class="font-label-md text-label-md">Emergency Contacts</span>
+</a>
+<a class="flex items-center space-x-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-r-full" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-md text-label-md">Insurance</span>
+</a>
+<a class="flex items-center space-x-md p-md text-on-surface-variant hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-r-full" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-80 pb-24 md:pb-0 min-h-screen">
+<!-- TopAppBar (Mobile & Desktop Header) -->
+<header class="fixed top-0 left-0 md:left-80 right-0 w-full md:w-[calc(100%-20rem)] z-50 flex justify-between items-center px-gutter h-16 bg-surface border-b border-outline-variant">
+<div class="flex items-center space-x-md md:hidden">
+<button class="text-primary hover:bg-surface-container-low transition-colors duration-200 p-sm rounded-full">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-bold text-primary">CareConnect</h1>
+</div>
+<div class="hidden md:flex items-center">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary tracking-tight">CareConnect</h1>
+</div>
+<div class="flex items-center">
+<img alt="User Profile Avatar" class="w-8 h-8 rounded-full object-cover" data-alt="A small circular avatar placeholder image for a user profile in a healthcare application dashboard. Simple, clinical, and clean light-mode styling." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgBx1U6sZyTgKfkRUDCIgkLhn3ntsHVPrvkL47TlKD8cpMWJGZCPeRtjxI1ImZpUhLa_7JhYh1iWpSnxsGvq3aW6ln-LbKAVdjcMCEX6LetnMvvKyC64vhOtBP3tKLlMilM8Xg2Y1yGDp3_rMnILFP3QIJQPnYylKMurQ56TTXe1_eUY0jJ34QYhLLS9nDslb1sLE-5Bm0aWtbUH-w3AD-_22wzwEwJyoheBFX-pIdNK8Ynkw1dAGm"/>
+</div>
+</header>
+<div class="pt-24 px-gutter md:px-lg max-w-container-max mx-auto space-y-lg">
+<!-- Patient Header Overview -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center bg-surface p-lg rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<div class="flex items-center space-x-lg">
+<div class="w-20 h-20 rounded-full bg-surface-container flex items-center justify-center overflow-hidden border-2 border-primary-container">
+<img alt="Sarah Johnson" class="w-full h-full object-cover" data-alt="A portrait of an elderly female patient, Sarah Johnson, smiling gently. The image is bright, with soft natural lighting, conveying a sense of calm and well-being in a comfortable home environment. Corporate modern healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi1ENm8V-lFRUq4O9mMBMt1XiFxURRgy5EuAJQ1zZNsV-angLI5FuaAcneixJCNORt8DbeTClgN0luCD5pho2B6pTLt1wYDK7yrNa0wyNvs5OM3wtvRJk8yJzCR5GSMY6pheuaLOJiQ4iOvXJ8twCVU3pzju72ETOOJkA2nDpNw5c658tB64FO89KkeppzjoBGHSBDIM8QibZIm5VHl8FREl5D5QnuGbfeTbR3WjJTTBi2Q8-TDt1o"/>
+</div>
+<div>
+<h2 class="font-display-lg text-title-md md:text-display-lg text-on-surface font-bold">Sarah Johnson</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm">Primary Patient • Age 78</p>
+</div>
+</div>
+<div class="mt-md md:mt-0 flex items-center space-x-sm bg-tertiary-container/10 px-md py-sm rounded-full border border-tertiary-container/20">
+<div class="w-3 h-3 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-label-md text-label-md text-on-tertiary-fixed-variant font-bold uppercase tracking-wider">Stable Status</span>
+</div>
+</div>
+<!-- Bento Grid Layout for Dashboard Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Medication Adherence Card -->
+<div class="bg-surface p-lg rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-outline-variant/30 col-span-1 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center space-x-sm text-primary">
+<span class="material-symbols-outlined fill-icon" data-icon="pill">pill</span>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Medication</h3>
+</div>
+<span class="bg-primary-container text-on-primary-container font-label-sm text-label-sm px-sm py-xs rounded-full">Today</span>
+</div>
+<div class="flex items-end space-x-sm mb-sm">
+<span class="font-display-lg text-display-lg font-bold text-primary">3/4</span>
+<span class="font-body-md text-body-md text-on-surface-variant pb-2">Taken</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-2 mb-md">
+<div class="bg-primary h-2 rounded-full" style="width: 75%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[16px] mr-xs" data-icon="schedule">schedule</span>
+                        Next dose: Lisinopril at 8:00 PM
+                    </p>
+</div>
+<!-- Vitals Summary Card -->
+<div class="bg-surface p-lg rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] border border-outline-variant/30 col-span-1 md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-md">
+<div class="col-span-1 sm:col-span-2 flex justify-between items-start mb-sm">
+<div class="flex items-center space-x-sm text-secondary">
+<span class="material-symbols-outlined fill-icon" data-icon="monitor_heart">monitor_heart</span>
+<h3 class="font-title-md text-title-md font-semibold text-on-surface">Latest Vitals</h3>
+</div>
+<span class="text-on-surface-variant font-label-sm text-label-sm">Updated 2 hrs ago</span>
+</div>
+<!-- Heart Rate -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-surface-container-highest flex items-center space-x-md">
+<div class="p-sm bg-error-container text-on-error-container rounded-full flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Heart Rate</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">72 <span class="font-body-md font-normal text-on-surface-variant">bpm</span></p>
+</div>
+</div>
+<!-- Blood Pressure -->
+<div class="bg-surface-container-lowest p-md rounded-lg border border-surface-container-highest flex items-center space-x-md">
+<div class="p-sm bg-secondary-container text-on-secondary-container rounded-full flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="bloodtype">bloodtype</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wide">Blood Pressure</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">120/80 <span class="font-body-md font-normal text-on-surface-variant">mmHg</span></p>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Alerts Section -->
+<section class="mt-2xl">
+<h3 class="font-title-md text-title-md font-bold text-on-surface mb-md">Recent Alerts &amp; Insights</h3>
+<div class="space-y-sm">
+<!-- Alert Item (Warning) -->
+<div class="flex items-start space-x-md p-md bg-surface border-l-4 border-error rounded-r-xl shadow-sm">
+<span class="material-symbols-outlined text-error mt-xs" data-icon="error">error</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Missed Morning Check-in</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Sarah did not complete her routine morning wellness survey. Recommend a brief follow-up call.</p>
+<p class="font-label-sm text-label-sm text-outline mt-sm">Today, 10:15 AM</p>
+</div>
+<button class="ml-auto text-primary font-label-md text-label-md hover:underline">Review</button>
+</div>
+<!-- Insight Item (Neutral) -->
+<div class="flex items-start space-x-md p-md bg-surface border-l-4 border-secondary rounded-r-xl shadow-sm mt-sm">
+<span class="material-symbols-outlined text-secondary mt-xs" data-icon="info">info</span>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-semibold">Upcoming Appointment Reminder</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Cardiology follow-up with Dr. Smith scheduled for tomorrow at 2:00 PM.</p>
+<p class="font-label-sm text-label-sm text-outline mt-sm">Tomorrow</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface-container rounded-t-xl shadow-lg border-t-0 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+<!-- Active Nav Item -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm text-label-sm mt-1">Timeline</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-sm text-label-sm mt-1">Alerts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant scale-95 transition-transform duration-150 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

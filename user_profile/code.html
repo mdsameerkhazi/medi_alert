@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareConnect - Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-lowest": "#ffffff",
+          "surface-bright": "#f8f9ff",
+          "on-primary": "#ffffff",
+          "primary-fixed-dim": "#b4c5ff",
+          "on-error-container": "#93000a",
+          "surface-container-low": "#eff4ff",
+          "secondary": "#006a61",
+          "on-primary-container": "#eeefff",
+          "tertiary-container": "#007f36",
+          "on-surface": "#0b1c30",
+          "surface-container-high": "#dce9ff",
+          "on-error": "#ffffff",
+          "surface-container-highest": "#d3e4fe",
+          "on-primary-fixed": "#00174b",
+          "outline-variant": "#c3c6d7",
+          "on-secondary-container": "#006f66",
+          "primary": "#004ac6",
+          "primary-fixed": "#dbe1ff",
+          "on-tertiary": "#ffffff",
+          "inverse-surface": "#213145",
+          "error": "#ba1a1a",
+          "on-surface-variant": "#434655",
+          "surface-variant": "#d3e4fe",
+          "surface-container": "#e5eeff",
+          "on-background": "#0b1c30",
+          "secondary-container": "#86f2e4",
+          "outline": "#737686",
+          "error-container": "#ffdad6",
+          "background": "#f8f9ff",
+          "inverse-on-surface": "#eaf1ff",
+          "on-tertiary-container": "#c7ffca",
+          "tertiary-fixed-dim": "#62df7d"
+        },
+        borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" },
+        spacing: { lg: "24px", sm: "8px", md: "16px", xs: "4px" }
+      }
+    }
+  }
+</script>
+<style>
+  body { background-color: #f8f9ff; color: #0b1c30; font-family: Inter, sans-serif; min-height: max(884px, 100dvh); }
+  .level-1-shadow { box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+  .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px); }
+  .modal-card { background:#fff;border-radius:1rem;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;padding:2rem;box-shadow:0 24px 64px rgba(0,0,0,0.18); }
+  input:focus, select:focus, textarea:focus { outline:none;border-color:#004ac6;box-shadow:0 0 0 2px rgba(0,74,198,0.12); }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pb-8">
+
+<!-- ===== PROFILE SETUP / EDIT MODAL ===== -->
+<div id="profile-modal" class="modal-overlay hidden">
+  <div class="modal-card">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl font-bold text-on-surface" id="modal-title">👋 Set Up Your Profile</h2>
+      <button id="modal-close-btn" onclick="closeModal()" class="text-on-surface-variant hover:text-error transition-colors hidden">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <p class="text-sm text-on-surface-variant mb-6" id="modal-subtitle">Tell us about yourself so we can personalise your health experience.</p>
+
+    <form id="profile-form" onsubmit="saveProfile(event)" class="flex flex-col gap-4">
+      <!-- Name -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">Full Name <span class="text-error">*</span></label>
+        <input id="f-name" type="text" placeholder="e.g. Sameer Khazi" required
+          class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+      </div>
+      <!-- Age + Gender -->
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface mb-1">Age <span class="text-error">*</span></label>
+          <input id="f-age" type="number" min="1" max="120" placeholder="e.g. 28" required
+            class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface mb-1">Gender</label>
+          <select id="f-gender" class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+      <!-- Blood + Height -->
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm font-semibold text-on-surface mb-1">Blood Type</label>
+          <select id="f-blood" class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all">
+            <option value="Unknown">Unknown</option>
+            <option value="A+">A+</option><option value="A-">A-</option>
+            <option value="B+">B+</option><option value="B-">B-</option>
+            <option value="AB+">AB+</option><option value="AB-">AB-</option>
+            <option value="O+">O+</option><option value="O-">O-</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-on-surface mb-1">Height (cm)</label>
+          <input id="f-height" type="number" min="50" max="250" placeholder="e.g. 175"
+            class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+        </div>
+      </div>
+      <!-- Weight -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">Weight (kg)</label>
+        <input id="f-weight" type="number" min="10" max="300" step="0.1" placeholder="e.g. 70.5"
+          class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+      </div>
+      <!-- Phone -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">Phone Number</label>
+        <input id="f-phone" type="tel" placeholder="e.g. +91 9876543210"
+          class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+      </div>
+      <!-- Role -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">I am a</label>
+        <select id="f-role" class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all">
+          <option value="Patient">Patient</option>
+          <option value="Caregiver">Caregiver</option>
+        </select>
+      </div>
+      <!-- Allergies -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">Known Allergies</label>
+        <input id="f-allergies" type="text" placeholder="e.g. Penicillin, Peanuts (comma-separated)"
+          class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+      </div>
+      <!-- Conditions -->
+      <div>
+        <label class="block text-sm font-semibold text-on-surface mb-1">Chronic Conditions</label>
+        <input id="f-conditions" type="text" placeholder="e.g. Hypertension, Diabetes"
+          class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+      </div>
+      <!-- Emergency Contact -->
+      <div class="border border-error/20 rounded-lg p-4 bg-error-container/10">
+        <p class="text-sm font-bold text-on-surface mb-3 flex items-center gap-2">
+          <span class="material-symbols-outlined text-error text-base" style="font-variation-settings:'FILL' 1">emergency</span>
+          Emergency Contact
+        </p>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-on-surface-variant mb-1">Name</label>
+            <input id="f-ec-name" type="text" placeholder="Contact name"
+              class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-on-surface-variant mb-1">Relationship</label>
+            <input id="f-ec-rel" type="text" placeholder="e.g. Mother, Spouse"
+              class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-semibold text-on-surface-variant mb-1">Phone</label>
+            <input id="f-ec-phone" type="tel" placeholder="+91 XXXXXXXXXX"
+              class="w-full px-3 py-2 border border-outline-variant rounded-lg text-sm bg-white transition-all"/>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit"
+        class="mt-2 w-full bg-primary text-on-primary py-3 rounded-lg font-bold text-sm hover:bg-primary/90 active:scale-95 transition-all shadow-md">
+        Save Profile
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="flex-1 max-w-[1280px] mx-auto w-full px-4 md:px-6 lg:px-8 py-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+  <!-- Left Column -->
+  <div class="md:col-span-4 lg:col-span-3 flex flex-col gap-4">
+
+    <!-- Profile Card -->
+    <div class="bg-surface-container-lowest rounded-xl level-1-shadow p-6 flex flex-col items-center text-center border border-surface-variant">
+      <div class="relative mb-4">
+        <div id="profile-avatar"
+          class="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-on-primary text-4xl font-bold shadow-md border-4 border-surface-container-lowest select-none">
+          ?
+        </div>
+        <button onclick="openModal()"
+          class="absolute bottom-0 right-0 bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:opacity-90 active:scale-95 transition-all z-20 border-2 border-surface-container-lowest">
+          <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">edit</span>
+        </button>
+      </div>
+      <h2 id="display-name" class="text-xl font-bold text-on-surface mb-1">—</h2>
+      <span id="display-role" class="bg-surface-container-high text-on-surface-variant text-xs px-3 py-1 rounded-full uppercase tracking-wider mb-6">—</span>
+      <div class="w-full h-[1px] bg-outline-variant/30 mb-6"></div>
+      <div class="w-full flex justify-between px-4">
+        <div class="flex flex-col items-center gap-1">
+          <span id="display-age" class="text-xl font-bold text-primary">—</span>
+          <span class="text-xs text-on-surface-variant">Age</span>
+        </div>
+        <div class="w-[1px] bg-outline-variant/30 self-stretch"></div>
+        <div class="flex flex-col items-center gap-1">
+          <span id="display-blood" class="text-xl font-bold text-primary">—</span>
+          <span class="text-xs text-on-surface-variant">Blood</span>
+        </div>
+        <div class="w-[1px] bg-outline-variant/30 self-stretch"></div>
+        <div class="flex flex-col items-center gap-1">
+          <span id="display-height" class="text-xl font-bold text-primary">—</span>
+          <span class="text-xs text-on-surface-variant">cm</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Completeness -->
+    <div id="completeness-card" class="bg-secondary-container/20 rounded-xl level-1-shadow p-4 border border-secondary/10 flex items-start gap-3">
+      <span class="material-symbols-outlined text-secondary mt-1" style="font-variation-settings:'FILL' 1">info</span>
+      <div class="w-full">
+        <h4 class="text-sm font-semibold text-on-secondary-container mb-1">Complete your profile</h4>
+        <p class="text-xs text-on-surface-variant mb-2">Fill in emergency contact, weight, and allergies to protect yourself.</p>
+        <div class="w-full bg-surface-container-high rounded-full h-2 mb-1 overflow-hidden">
+          <div id="completeness-bar" class="bg-secondary h-2 rounded-full transition-all duration-700" style="width:0%"></div>
+        </div>
+        <span id="completeness-pct" class="text-xs text-on-surface-variant">0% Complete</span>
+      </div>
+    </div>
+
+    <!-- Caregiver Links -->
+    <div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-4 shadow-sm">
+      <h3 class="text-base font-bold text-on-surface mb-1 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">group</span>
+        Caregiver Links
+      </h3>
+      <p class="text-xs text-on-surface-variant mb-3">Invite a caregiver connection by email</p>
+      <div class="flex gap-2">
+        <input type="email" id="invite-email" placeholder="caregiver@email.com"
+          class="flex-grow px-3 py-2 bg-surface-container border border-outline-variant rounded-lg text-sm outline-none focus:border-primary"/>
+        <button onclick="sendCaregiverInvite()"
+          class="bg-primary text-on-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/95 active:scale-95 transition-all">Invite</button>
+      </div>
+      <div class="border-t border-outline-variant/30 pt-3 mt-3">
+        <h4 class="text-xs font-semibold text-on-surface mb-2">Pending Connections</h4>
+        <div id="pending-invites-list">
+          <p id="no-pending-invites" class="text-xs text-on-surface-variant italic">No pending connection requests</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Right Column -->
+  <div class="md:col-span-8 lg:col-span-9 flex flex-col gap-6">
+
+    <!-- Quick Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div class="bg-surface-container-lowest rounded-xl level-1-shadow p-4 border border-surface-variant flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-error-container text-on-error-container flex items-center justify-center">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1">favorite</span>
+          </div>
+          <span class="text-xs text-on-surface-variant uppercase tracking-wider">Heart Rate</span>
+        </div>
+        <div class="mt-auto flex items-baseline gap-1">
+          <span class="text-2xl font-bold text-on-surface">—</span>
+          <span class="text-xs text-on-surface-variant">bpm</span>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl level-1-shadow p-4 border border-surface-variant flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1">blood_pressure</span>
+          </div>
+          <span class="text-xs text-on-surface-variant uppercase tracking-wider">Pressure</span>
+        </div>
+        <div class="mt-auto"><span class="text-2xl font-bold text-on-surface">—</span></div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl level-1-shadow p-4 border border-surface-variant flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-tertiary-fixed-dim text-on-surface flex items-center justify-center">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1">monitor_weight</span>
+          </div>
+          <span class="text-xs text-on-surface-variant uppercase tracking-wider">Weight</span>
+        </div>
+        <div class="mt-auto flex items-baseline gap-1">
+          <span id="display-weight" class="text-2xl font-bold text-on-surface">—</span>
+          <span class="text-xs text-on-surface-variant">kg</span>
+        </div>
+      </div>
+      <div class="bg-surface-container-lowest rounded-xl level-1-shadow p-4 border border-surface-variant flex flex-col">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center">
+            <span class="material-symbols-outlined text-lg" style="font-variation-settings:'FILL' 1">calendar_today</span>
+          </div>
+          <span class="text-xs text-on-surface-variant uppercase tracking-wider">Member Since</span>
+        </div>
+        <div class="mt-auto"><span id="display-joined" class="text-lg font-bold text-on-surface">—</span></div>
+      </div>
+    </div>
+
+    <!-- Personal Info -->
+    <div class="bg-surface-container-lowest rounded-xl level-1-shadow border border-surface-variant p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">person</span>
+          Personal Information
+        </h3>
+        <button onclick="openModal()" class="text-primary text-sm font-semibold hover:underline flex items-center gap-1">
+          <span class="material-symbols-outlined text-base">edit</span> Edit
+        </button>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="bg-surface-container-low rounded-lg p-3">
+          <p class="text-xs text-on-surface-variant mb-1">Phone</p>
+          <p id="info-phone" class="text-sm font-semibold text-on-surface">—</p>
+        </div>
+        <div class="bg-surface-container-low rounded-lg p-3">
+          <p class="text-xs text-on-surface-variant mb-1">Gender</p>
+          <p id="info-gender" class="text-sm font-semibold text-on-surface">—</p>
+        </div>
+        <div class="bg-surface-container-low rounded-lg p-3">
+          <p class="text-xs text-on-surface-variant mb-1">Known Allergies</p>
+          <p id="info-allergies" class="text-sm font-semibold text-on-surface">—</p>
+        </div>
+        <div class="bg-surface-container-low rounded-lg p-3">
+          <p class="text-xs text-on-surface-variant mb-1">Chronic Conditions</p>
+          <p id="info-conditions" class="text-sm font-semibold text-on-surface">—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency Contact -->
+    <div class="bg-surface-container-lowest rounded-xl level-1-shadow border border-surface-variant p-5">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-bold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-error" style="font-variation-settings:'FILL' 1">emergency</span>
+          Emergency Contact
+        </h3>
+        <button onclick="openModal()" class="text-primary text-sm font-semibold hover:underline flex items-center gap-1">
+          <span class="material-symbols-outlined text-base">edit</span> Edit
+        </button>
+      </div>
+      <div class="bg-error-container/10 border border-error/20 rounded-lg p-4 flex items-center gap-4">
+        <div id="ec-avatar"
+          class="w-12 h-12 rounded-full bg-error-container text-on-error-container flex items-center justify-center font-bold text-lg select-none flex-shrink-0">?</div>
+        <div>
+          <p id="ec-name" class="text-sm font-bold text-on-surface">Not set</p>
+          <p id="ec-rel" class="text-xs text-on-surface-variant">—</p>
+          <p id="ec-phone" class="text-xs text-error font-semibold mt-1">Add a phone number →</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions menu -->
+    <div class="bg-surface-container-lowest rounded-xl level-1-shadow border border-surface-variant overflow-hidden">
+      <button onclick="openModal()"
+        class="w-full flex items-center justify-between p-4 hover:bg-surface-bright transition-colors group cursor-pointer border-b border-outline-variant/20">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-fixed transition-colors">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">edit_document</span>
+          </div>
+          <div class="text-left">
+            <p class="text-sm font-semibold text-on-surface">Edit Profile</p>
+            <p class="text-xs text-on-surface-variant">Update personal details and preferences</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+      </button>
+      <a href="../settings/code.html"
+        class="flex items-center justify-between p-4 hover:bg-surface-bright transition-colors group cursor-pointer">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-fixed transition-colors">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">settings</span>
+          </div>
+          <div>
+            <p class="text-sm font-semibold text-on-surface">Settings</p>
+            <p class="text-xs text-on-surface-variant">App preferences, notifications, security</p>
+          </div>
+        </div>
+        <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">chevron_right</span>
+      </a>
+    </div>
+
+    <!-- Sign out -->
+    <button onclick="signOut()"
+      class="w-full md:w-auto self-start px-6 py-3 rounded-lg border border-outline text-on-surface-variant text-sm font-semibold hover:bg-surface-variant hover:text-on-surface transition-colors active:scale-95 duration-200 flex items-center gap-2">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 0">logout</span>
+      Sign Out
+    </button>
+
+  </div>
+</div>
+</main>
+
+<!-- Toast -->
+<div id="toast"
+  class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-xl shadow-lg text-sm opacity-0 pointer-events-none transition-opacity duration-300 z-50 whitespace-nowrap"></div>
+
+<script>
+  const STORAGE_KEY = 'careconnect_profile';
+  const API_BASE = window.location.origin.includes('localhost') ? 'http://localhost:5000/api/auth' : '/api/auth';
+
+  function getToken() {
+    return localStorage.getItem('careconnect_token');
+  }
+
+  async function loadProfile() {
+    const token = getToken();
+    if (token) {
+      try {
+        const res = await fetch(`${API_BASE}/profile`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          const p = {
+            name: data.profile.full_name || '',
+            age: data.profile.age || '',
+            gender: 'Unspecified',
+            blood: data.profile.blood_type || 'Unknown',
+            height: data.profile.height || '',
+            weight: data.profile.weight || '',
+            phone: data.profile.phone_number || '',
+            role: data.user.role || 'Patient',
+            allergies: data.profile.allergies || '',
+            conditions: data.profile.conditions || '',
+            ec_name: data.profile.ec_name || '',
+            ec_rel: data.profile.ec_rel || '',
+            ec_phone: data.profile.ec_phone || '',
+            joined: new Date(data.user.created_at).toLocaleDateString('en-IN', {month:'short', year:'numeric'})
+          };
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+          return p;
+        }
+      } catch (err) {
+        console.error("API Error", err);
+      }
+    }
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+  }
+
+  async function saveProfile(e) {
+    e.preventDefault();
+    const existing = (await loadProfile()) || {};
+    const profile = {
+      name:       document.getElementById('f-name').value.trim(),
+      age:        document.getElementById('f-age').value.trim(),
+      gender:     document.getElementById('f-gender').value,
+      blood:      document.getElementById('f-blood').value,
+      height:     document.getElementById('f-height').value.trim(),
+      weight:     document.getElementById('f-weight').value.trim(),
+      phone:      document.getElementById('f-phone').value.trim(),
+      role:       document.getElementById('f-role').value,
+      allergies:  document.getElementById('f-allergies').value.trim(),
+      conditions: document.getElementById('f-conditions').value.trim(),
+      ec_name:    document.getElementById('f-ec-name').value.trim(),
+      ec_rel:     document.getElementById('f-ec-rel').value.trim(),
+      ec_phone:   document.getElementById('f-ec-phone').value.trim(),
+      joined:     existing.joined || new Date().toLocaleDateString('en-IN', {month:'short', year:'numeric'})
+    };
+
+    const token = getToken();
+    if (token) {
+      try {
+        await fetch(`${API_BASE}/profile`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            full_name: profile.name,
+            age: parseInt(profile.age) || null,
+            blood_type: profile.blood,
+            height: profile.height,
+            weight: profile.weight,
+            phone_number: profile.phone,
+            allergies: profile.allergies,
+            conditions: profile.conditions,
+            ec_name: profile.ec_name,
+            ec_rel: profile.ec_rel,
+            ec_phone: profile.ec_phone
+          })
+        });
+      } catch (err) {
+        console.error("API Error during save", err);
+      }
+    }
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+    closeModal();
+    renderProfile(profile);
+    showToast('✅ Profile saved successfully!');
+  }
+
+  function renderProfile(p) {
+    if (!p) return;
+    const initials = p.name
+      ? p.name.trim().split(/\s+/).map(w => w[0]).join('').toUpperCase().slice(0, 2)
+      : '?';
+    document.getElementById('profile-avatar').textContent = initials;
+    document.getElementById('display-name').textContent   = p.name   || '—';
+    document.getElementById('display-role').textContent   = p.role   || '—';
+    document.getElementById('display-age').textContent    = p.age    || '—';
+    document.getElementById('display-blood').textContent  = (p.blood && p.blood !== 'Unknown') ? p.blood : '—';
+    document.getElementById('display-height').textContent = p.height || '—';
+    document.getElementById('display-weight').textContent = p.weight || '—';
+    document.getElementById('display-joined').textContent = p.joined || '—';
+
+    document.getElementById('info-phone').textContent      = p.phone      || '—';
+    document.getElementById('info-gender').textContent     = p.gender     || '—';
+    document.getElementById('info-allergies').textContent  = p.allergies  || 'None reported';
+    document.getElementById('info-conditions').textContent = p.conditions || 'None reported';
+
+    const ecName = p.ec_name || 'Not set';
+    document.getElementById('ec-name').textContent  = ecName;
+    document.getElementById('ec-rel').textContent   = p.ec_rel   || '—';
+    document.getElementById('ec-phone').textContent = p.ec_phone || 'Add a phone number →';
+    document.getElementById('ec-avatar').textContent = ecName !== 'Not set' ? ecName[0].toUpperCase() : '?';
+
+    // Completeness score
+    const fields = [p.name, p.age, p.gender, p.blood !== 'Unknown' ? p.blood : '', p.height, p.weight, p.phone, p.allergies, p.conditions, p.ec_name, p.ec_phone];
+    const filled = fields.filter(f => f && f.trim() !== '').length;
+    const pct = Math.round((filled / fields.length) * 100);
+    document.getElementById('completeness-bar').style.width = pct + '%';
+    document.getElementById('completeness-pct').textContent = pct + '% Complete';
+    if (pct >= 100) document.getElementById('completeness-card').style.display = 'none';
+    else document.getElementById('completeness-card').style.display = '';
+  }
+
+  async function openModal() {
+    const p = await loadProfile();
+    if (p) {
+      document.getElementById('f-name').value       = p.name       || '';
+      document.getElementById('f-age').value        = p.age        || '';
+      document.getElementById('f-gender').value     = p.gender     || '';
+      document.getElementById('f-blood').value      = p.blood      || 'Unknown';
+      document.getElementById('f-height').value     = p.height     || '';
+      document.getElementById('f-weight').value     = p.weight     || '';
+      document.getElementById('f-phone').value      = p.phone      || '';
+      document.getElementById('f-role').value       = p.role       || 'Patient';
+      document.getElementById('f-allergies').value  = p.allergies  || '';
+      document.getElementById('f-conditions').value = p.conditions || '';
+      document.getElementById('f-ec-name').value    = p.ec_name    || '';
+      document.getElementById('f-ec-rel').value     = p.ec_rel     || '';
+      document.getElementById('f-ec-phone').value   = p.ec_phone   || '';
+      document.getElementById('modal-title').textContent    = '✏️ Edit Your Profile';
+      document.getElementById('modal-subtitle').textContent = 'Update your personal details below. All changes are saved locally.';
+      document.getElementById('modal-close-btn').classList.remove('hidden');
+    }
+    document.getElementById('profile-modal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('profile-modal').classList.add('hidden');
+  }
+
+  function signOut() {
+    if (confirm('Sign out and clear your profile data from this device?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem('careconnect_token');
+      if (window.parent && window.parent.authChanged) {
+        window.parent.authChanged();
+      } else {
+        location.reload();
+      }
+    }
+  }
+
+  function sendCaregiverInvite() {
+    const input = document.getElementById('invite-email');
+    const email = input.value.trim();
+    if (!email) return;
+    const list = document.getElementById('pending-invites-list');
+    const noPending = document.getElementById('no-pending-invites');
+    if (noPending) noPending.remove();
+    const id = Date.now();
+    const item = document.createElement('div');
+    item.id = 'invite-' + id;
+    item.className = 'flex items-center justify-between bg-surface-container-low p-2 rounded-lg border border-outline-variant/30 mt-1';
+    item.innerHTML = `
+      <div style="min-width:0;flex-grow:1">
+        <div class="text-xs font-semibold text-on-surface truncate">${email}</div>
+        <div class="text-xs text-secondary">Pending response</div>
+      </div>
+      <button onclick="cancelInvite(${id})" class="text-error text-xs font-semibold hover:underline px-2 flex-shrink-0">Cancel</button>
+    `;
+    list.appendChild(item);
+    showToast('📧 Invitation sent to ' + email);
+    input.value = '';
+  }
+
+  function cancelInvite(id) {
+    const item = document.getElementById('invite-' + id);
+    if (item) item.remove();
+    const list = document.getElementById('pending-invites-list');
+    if (!list.querySelector('[id^="invite-"]'))
+      list.innerHTML = '<p id="no-pending-invites" class="text-xs text-on-surface-variant italic">No pending connection requests</p>';
+    showToast('Invitation cancelled.');
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.style.opacity = '1';
+    t.style.pointerEvents = 'none';
+    setTimeout(() => { t.style.opacity = '0'; }, 2800);
+  }
+
+  // Init
+  window.addEventListener('DOMContentLoaded', async () => {
+    const p = await loadProfile();
+    if (!p) {
+      document.getElementById('profile-modal').classList.remove('hidden');
+    } else {
+      renderProfile(p);
+    }
+  });
+</script>
+</body></html>

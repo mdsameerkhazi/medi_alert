@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - CareConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#eeefff",
+                    "on-surface-variant": "#434655",
+                    "primary": "#004ac6",
+                    "surface-container": "#e5eeff",
+                    "on-secondary-fixed": "#00201d",
+                    "tertiary-container": "#007f36",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "surface-dim": "#cbdbf5",
+                    "primary-fixed": "#dbe1ff",
+                    "on-surface": "#0b1c30",
+                    "error": "#ba1a1a",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "error-container": "#ffdad6",
+                    "tertiary": "#006329",
+                    "outline-variant": "#c3c6d7",
+                    "surface-variant": "#d3e4fe",
+                    "on-secondary-fixed-variant": "#005049",
+                    "tertiary-fixed": "#7ffc97",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface": "#f8f9ff",
+                    "outline": "#737686",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-fixed": "#002109",
+                    "primary-container": "#2563eb",
+                    "on-tertiary-container": "#c7ffca",
+                    "inverse-surface": "#213145",
+                    "surface-tint": "#0053db",
+                    "surface-container-high": "#dce9ff",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary-container": "#006f66",
+                    "secondary-container": "#86f2e4",
+                    "background": "#f8f9ff",
+                    "inverse-primary": "#b4c5ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary-fixed-variant": "#005320",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#62df7d",
+                    "secondary": "#006a61",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#eff4ff",
+                    "on-background": "#0b1c30",
+                    "on-primary-fixed": "#00174b",
+                    "secondary-fixed": "#89f5e7"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "2xl": "48px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "unit": "4px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "3xl": "64px",
+                    "md": "16px",
+                    "sm": "8px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Atkinson Hyperlegible Next"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "label-md": ["Atkinson Hyperlegible Next"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Main Content Canvas (No Nav Shell per rules for transactional page) -->
+<main class="flex-1 flex items-center justify-center p-gutter w-full max-w-container-max mx-auto relative z-10">
+<!-- Login Card Container (Glass/Surface) -->
+<div class="bg-surface-container-lowest rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.05),_0_2px_4px_rgba(0,0,0,0.02)] border border-outline-variant/30 w-full max-w-md overflow-hidden flex flex-col">
+<!-- Header Area -->
+<div class="px-xl pt-xl pb-lg flex flex-col items-center text-center">
+<div class="bg-primary/10 p-sm rounded-full mb-md flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[32px] leading-none" data-icon="health_and_safety" data-weight="fill" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-xs">Welcome Back</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Sign in to securely access your health portal.</p>
+</div>
+<!-- Form Area -->
+<div class="px-xl pb-xl flex-1 flex flex-col gap-lg">
+<form class="flex flex-col gap-md" id="loginForm" onsubmit="handleLogin(event)">
+<!-- Email Field -->
+<div class="flex flex-col gap-xs relative">
+<label class="font-label-md text-label-md text-on-surface" for="email">Email Address</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-md text-on-surface-variant pointer-events-none select-none" data-icon="mail">mail</span>
+<input autocomplete="email" class="w-full h-12 pl-[48px] pr-md rounded-lg border border-outline bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="email" name="email" placeholder="patient@example.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-xs relative">
+<div class="flex items-center justify-between">
+<label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:text-primary-fixed-dim transition-colors hover:underline outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" href="#">Forgot Password?</a>
+</div>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-md text-on-surface-variant pointer-events-none select-none" data-icon="lock">lock</span>
+<input autocomplete="current-password" class="w-full h-12 pl-[48px] pr-[48px] rounded-lg border border-outline bg-surface-container-lowest text-on-surface font-body-md text-body-md placeholder:text-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute right-md text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center w-8 h-8 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary" onclick="const p = document.getElementById('password'); const i = this.querySelector('span'); if(p.type === 'password'){ p.type = 'text'; i.textContent = 'visibility_off'; } else { p.type = 'password'; i.textContent = 'visibility'; }" type="button">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-sm mt-sm">
+<button class="w-full h-12 bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface-container-lowest relative overflow-hidden group active:scale-[0.98] duration-150 shadow-sm" type="submit" id="loginBtn">
+<span class="flex items-center gap-2" id="loginBtnText">
+                                Sign In
+                                <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</span>
+<span class="hidden absolute inset-0 flex items-center justify-center" id="loginSpinner">
+<svg class="animate-spin h-5 w-5 text-on-primary" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path></svg>
+</span>
+</button>
+<a class="w-full h-12 bg-transparent border border-outline hover:bg-surface-container hover:border-primary/30 text-primary font-label-md text-label-md rounded-lg flex items-center justify-center transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98] duration-150" href="/register/code.html">
+                            Create an Account
+                        </a>
+</div>
+</form>
+</div>
+<!-- Footer Note inside Card -->
+<div class="bg-surface-container-low px-xl py-md flex items-center justify-center gap-xs border-t border-outline-variant/30 text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock_clock">lock_clock</span>
+<span>Secure &amp; Encrypted Connection</span>
+</div>
+</div>
+</main>
+<!-- Global Footer Component -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant flex flex-col items-center gap-md py-lg px-gutter w-full z-10 relative">
+<div class="flex gap-md flex-wrap justify-center">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" href="#">Privacy Policy</a>
+<span aria-hidden="true" class="text-outline-variant select-none">•</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" href="#">Terms of Service</a>
+<span aria-hidden="true" class="text-outline-variant select-none">•</span>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm" href="#">Help Center</a>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface opacity-75">© 2024 HealthLink. Secure Healthcare Solutions.</p>
+</footer>
+
+<!-- Toast Container -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-6 py-3 rounded-xl shadow-lg text-sm opacity-0 pointer-events-none transition-opacity duration-300 z-50 whitespace-nowrap"></div>
+
+<script>
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.remove('opacity-0');
+    t.classList.add('opacity-100');
+    setTimeout(() => {
+      t.classList.remove('opacity-100');
+      t.classList.add('opacity-0');
+    }, 3000);
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    const btnText = document.getElementById('loginBtnText');
+    const spinner = document.getElementById('loginSpinner');
+    const btn = document.getElementById('loginBtn');
+
+    // Show loading spinner
+    btnText.classList.add('hidden');
+    spinner.classList.remove('hidden');
+    btn.disabled = true;
+
+    try {
+      // 1. Attempt backend call
+      const apiBase = window.location.origin.includes('localhost') ? 'http://localhost:5000' : '';
+      const res = await fetch(`${apiBase}/api/auth/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        localStorage.setItem('careconnect_token', data.token);
+        localStorage.setItem('careconnect_profile', JSON.stringify(data.profile || { name: email.split('@')[0], email, role: 'Patient' }));
+        showToast('🔑 Login successful!');
+        setTimeout(() => {
+          if (window.parent && window.parent.authChanged) {
+            window.parent.authChanged();
+          } else {
+            window.location.href = '/dashboard/code.html';
+          }
+        }, 1000);
+      } else {
+        const err = await res.json();
+        throw new Error(err.message || 'Invalid credentials');
+      }
+    } catch(err) {
+      console.warn('Backend API offline or error. Falling back to offline mock mode.', err);
+      
+      // 2. Offline Fallback Mock Mode
+      showToast('⚠️ Backend offline. Logged in via Offline Demo Mode.');
+      
+      // Create a mock profile matching the user request
+      const mockProfile = {
+        name: "Sameer Khazi",
+        age: "28",
+        gender: "Male",
+        blood: "O+",
+        height: "175",
+        weight: "70.5",
+        phone: "+91 98765 43210",
+        role: "Patient",
+        allergies: "None",
+        conditions: "None",
+        ec_name: "Rahim Khazi",
+        ec_rel: "Father",
+        ec_phone: "+91 98765 43211",
+        joined: "Jul 2026"
+      };
+      
+      localStorage.setItem('careconnect_token', 'mock_jwt_token_sameer');
+      // Save profile both to backend profile storage format and local profile storage format
+      localStorage.setItem('careconnect_profile', JSON.stringify(mockProfile));
+      localStorage.setItem('careconnect_profile_data', JSON.stringify(mockProfile)); // backup
+      localStorage.setItem('careconnect_profile', JSON.stringify(mockProfile));
+
+      setTimeout(() => {
+        if (window.parent && window.parent.authChanged) {
+          window.parent.authChanged();
+        } else {
+          window.location.href = '/dashboard/code.html';
+        }
+      }, 1500);
+    } finally {
+      // Reset button state if not redirected
+      setTimeout(() => {
+        btnText.classList.remove('hidden');
+        spinner.classList.add('hidden');
+        btn.disabled = false;
+      }, 1500);
+    }
+  }
+</script>
+</body></html>

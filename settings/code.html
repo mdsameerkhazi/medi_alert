@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings - CareConnect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#eff4ff",
+                        "secondary": "#006a61",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#007f36",
+                        "surface-tint": "#0053db",
+                        "on-surface": "#0b1c30",
+                        "surface-container-high": "#dce9ff",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#d3e4fe",
+                        "on-primary-fixed": "#00174b",
+                        "tertiary-fixed": "#7ffc97",
+                        "outline-variant": "#c3c6d7",
+                        "on-secondary-container": "#006f66",
+                        "primary": "#004ac6",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#213145",
+                        "error": "#ba1a1a",
+                        "tertiary": "#006329",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-fixed": "#002109",
+                        "on-surface-variant": "#434655",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed-variant": "#005320",
+                        "surface-container": "#e5eeff",
+                        "surface-dim": "#cbdbf5",
+                        "on-background": "#0b1c30",
+                        "on-secondary-fixed": "#00201d",
+                        "secondary-fixed": "#89f5e7",
+                        "surface": "#f8f9ff",
+                        "on-tertiary-container": "#c7ffca",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-container": "#86f2e4",
+                        "outline": "#737686",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "on-secondary-fixed-variant": "#005049",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#62df7d",
+                        "background": "#f8f9ff",
+                        "inverse-on-surface": "#eaf1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "container-max": "1280px",
+                        "2xl": "48px",
+                        "xl": "32px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "title-md": ["Inter"],
+                        "label-sm": ["Atkinson Hyperlegible Next"],
+                        "label-md": ["Atkinson Hyperlegible Next"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Safe area padding for mobile nav */
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md pb-8">
+<!-- Main Content Area -->
+<main class="flex-grow w-full max-w-container-max mx-auto px-md py-lg md:py-xl">
+<div class="max-w-2xl mx-auto space-y-lg">
+<div class="mb-lg">
+<h2 class="font-title-md text-title-md text-on-background mb-xs">Settings</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Manage your account preferences and app configurations.</p>
+</div>
+<!-- Settings Group 1: Preferences -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="px-md py-sm bg-surface-container-low border-b border-outline-variant">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Preferences</h3>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Theme Toggle -->
+<div class="flex items-center justify-between p-md hover:bg-surface-bright transition-colors cursor-pointer" onclick="document.getElementById('theme-toggle').click()">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">dark_mode</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Dark Mode</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Adjust application appearance</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="theme-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-variant peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-fixed-dim rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<!-- Notifications -->
+<a class="flex items-center justify-between p-md hover:bg-surface-bright transition-colors active:scale-[0.98]" href="#">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">notifications_active</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Notifications</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Alerts and reminders</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</a>
+<!-- Language Selection -->
+<div class="flex items-center justify-between p-md hover:bg-surface-bright transition-colors border-t border-outline-variant/30">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">translate</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">App Language</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Select interface language</p>
+</div>
+</div>
+<select class="bg-surface-container dark:bg-surface border border-outline-variant rounded-lg px-sm py-xs font-label-md text-label-md text-on-surface outline-none focus:ring-2 focus:ring-primary focus:border-primary">
+<option value="en" selected>English</option>
+<option value="kn">ಕನ್ನಡ (Kannada)</option>
+<option value="hi">हिन्दी (Hindi)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Settings Group 2: Account & Security -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="px-md py-sm bg-surface-container-low border-b border-outline-variant">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Account &amp; Security</h3>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- Privacy & Security -->
+<a class="flex items-center justify-between p-md hover:bg-surface-bright transition-colors active:scale-[0.98]" href="#">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">Privacy &amp; Security</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Password, biometrics, data sharing</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Settings Group 3: Support -->
+<section class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden">
+<div class="px-md py-sm bg-surface-container-low border-b border-outline-variant">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider">Support</h3>
+</div>
+<div class="divide-y divide-outline-variant">
+<!-- About -->
+<a class="flex items-center justify-between p-md hover:bg-surface-bright transition-colors active:scale-[0.98]" href="#">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">info</span>
+</div>
+<div>
+<p class="font-body-md text-body-md text-on-surface font-medium">About</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Version 2.4.1</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant">chevron_right</span>
+</a>
+</div>
+</section>
+<!-- Logout Button -->
+<div class="pt-lg">
+<button onclick="handleLogOut()" class="w-full py-md px-lg bg-surface-container-lowest border border-error text-error rounded-lg font-title-md text-title-md shadow-sm hover:bg-error-container transition-colors active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-error flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined">logout</span>
+                    Log Out
+                </button>
+</div>
+</div>
+</main>
+<!-- Toast Container -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface px-lg py-md rounded-xl shadow-lg font-body-md text-body-md opacity-0 pointer-events-none transition-opacity duration-300 z-50">
+  Settings saved successfully!
+</div>
+
+<script>
+  // Language Selector interactive toast
+  const langSelect = document.querySelector('select');
+  if (langSelect) {
+    langSelect.addEventListener('change', (e) => {
+      const selectedLangName = langSelect.options[langSelect.selectedIndex].text;
+      showToast('Language updated to ' + selectedLangName);
+    });
+  }
+
+  // Dark Mode toggle interaction
+  const themeSwitch = document.getElementById('theme-toggle');
+  if (themeSwitch) {
+    const isDark = document.documentElement.classList.contains('dark') || document.documentElement.getAttribute('data-theme') === 'dark';
+    themeSwitch.checked = isDark;
+
+    themeSwitch.addEventListener('change', (e) => {
+      const dark = e.target.checked;
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      document.documentElement.className = dark ? 'dark' : 'light';
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      showToast(dark ? 'Dark mode enabled' : 'Light mode enabled');
+      
+      // Sync parent shell theme
+      if (window.parent && window.parent.document) {
+        window.parent.document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        const parentIcon = window.parent.document.querySelector('#theme-toggle .material-symbols-outlined');
+        if (parentIcon) parentIcon.textContent = dark ? 'light_mode' : 'dark_mode';
+      }
+    });
+  }
+
+  function handleLogOut() {
+    if (confirm('Log out and clear your session?')) {
+      localStorage.removeItem('careconnect_profile');
+      localStorage.removeItem('careconnect_token');
+      if (window.parent && window.parent.authChanged) {
+        window.parent.authChanged();
+      } else {
+        location.reload();
+      }
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.remove('opacity-0');
+    toast.classList.add('opacity-100');
+    setTimeout(() => {
+      toast.classList.remove('opacity-100');
+      toast.classList.add('opacity-0');
+    }, 2000);
+  }
+</script>
+</body></html>

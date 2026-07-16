@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CareConnect - Emergency SOS</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed-variant": "#005320",
+                      "on-secondary-fixed-variant": "#005049",
+                      "surface": "#f8f9ff",
+                      "on-surface": "#0b1c30",
+                      "tertiary-fixed": "#7ffc97",
+                      "surface-variant": "#d3e4fe",
+                      "on-secondary-fixed": "#00201d",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#c7ffca",
+                      "on-primary-fixed": "#00174b",
+                      "surface-dim": "#cbdbf5",
+                      "error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "inverse-surface": "#213145",
+                      "surface-container": "#e5eeff",
+                      "on-tertiary-fixed": "#002109",
+                      "surface-bright": "#f8f9ff",
+                      "on-secondary-container": "#006f66",
+                      "inverse-on-surface": "#eaf1ff",
+                      "tertiary-fixed-dim": "#62df7d",
+                      "primary": "#004ac6",
+                      "outline-variant": "#c3c6d7",
+                      "error": "#ba1a1a",
+                      "surface-container-low": "#eff4ff",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#89f5e7",
+                      "inverse-primary": "#b4c5ff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "tertiary": "#006329",
+                      "surface-tint": "#0053db",
+                      "surface-container-highest": "#d3e4fe",
+                      "on-surface-variant": "#434655",
+                      "secondary": "#006a61",
+                      "secondary-container": "#86f2e4",
+                      "outline": "#737686",
+                      "primary-fixed": "#dbe1ff",
+                      "on-secondary": "#ffffff",
+                      "background": "#f8f9ff",
+                      "tertiary-container": "#007f36",
+                      "secondary-fixed-dim": "#6bd8cb",
+                      "on-background": "#0b1c30",
+                      "on-primary-container": "#eeefff",
+                      "primary-container": "#2563eb",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#dce9ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "16px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "3xl": "64px",
+                      "xs": "4px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "unit": "4px",
+                      "2xl": "48px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Atkinson Hyperlegible Next"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "label-md": ["Atkinson Hyperlegible Next"],
+                      "display-lg": ["Inter"],
+                      "title-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .no-select {
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        @keyframes pulse-ring {
+            0% { transform: scale(0.9); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+        
+        .animate-pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        .animate-pulse-ring-delayed {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) 1s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-error-container h-[884px] w-full flex flex-col font-body-md overflow-hidden no-select">
+<!-- Sticky Status Banner -->
+<header class="w-full bg-error text-on-error py-md px-gutter flex items-center justify-center shadow-lg z-50 shrink-0 relative overflow-hidden">
+<div class="absolute inset-0 bg-white/10 animate-pulse"></div>
+<span class="material-symbols-outlined mr-sm text-title-md relative z-10" style="font-variation-settings: 'FILL' 1;">warning</span>
+<h1 class="font-title-md text-title-md uppercase tracking-[0.1em] relative z-10">Emergency Mode Active</h1>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col px-gutter pt-lg pb-md gap-lg overflow-y-auto relative z-10">
+<!-- Hero: SOS Button -->
+<section class="flex-1 flex flex-col items-center justify-center min-h-[300px] relative">
+<!-- Pulse Rings Background -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-64 h-64 rounded-full bg-error/20 absolute animate-pulse-ring"></div>
+<div class="w-64 h-64 rounded-full bg-error/30 absolute animate-pulse-ring-delayed"></div>
+</div>
+<!-- Main Button -->
+<button class="relative w-56 h-56 rounded-full bg-error text-on-error shadow-[0_12px_48px_rgba(186,26,26,0.5)] flex flex-col items-center justify-center z-10 transition-transform duration-200 active:scale-[0.97] outline-none touch-none" id="sosButton">
+<span class="material-symbols-outlined text-[80px] mb-xs" style="font-variation-settings: 'FILL' 1;">sos</span>
+<span class="font-label-md text-label-md text-center">Hold to Trigger<br/>SOS</span>
+<!-- SVG Progress Ring -->
+<svg class="absolute inset-0 w-full h-full -rotate-90 pointer-events-none" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="47" stroke="rgba(255,255,255,0.1)" stroke-width="3"></circle>
+<!-- stroke-dasharray = 2 * PI * 47 = ~295 -->
+<circle class="transition-all duration-75 ease-linear" cx="50" cy="50" fill="none" id="progressRing" r="47" stroke="currentColor" stroke-dasharray="295" stroke-dashoffset="295" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+</button>
+<p class="text-on-error-container font-label-sm text-label-sm mt-lg text-center opacity-80 h-4" id="instructionText">Press and hold for 3 seconds</p>
+</section>
+<!-- Context Cards Area -->
+<section class="flex flex-col gap-md shrink-0 w-full max-w-md mx-auto">
+<!-- Live Location Map -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-error/20">
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-sm">my_location</span> 
+                        Live Location
+                    </h2>
+<div class="flex items-center gap-xs text-error">
+<div class="w-2 h-2 rounded-full bg-error animate-pulse"></div>
+<span class="font-label-sm text-label-sm">Tracking Active</span>
+</div>
+</div>
+<!-- Map Placeholder Image -->
+<div class="w-full h-32 rounded-lg relative overflow-hidden bg-surface-variant" data-alt="A stylized, high-contrast digital map interface showing a precise street-level location with an active emergency ping. The map uses a minimalist palette of stark white and greys, with a prominent, glowing emergency red indicator marking the user's position. The lighting is clinical and sharp, suitable for a critical medical or emergency response application." data-location="Current Location" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg')">
+<!-- Overlay Coordinates -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface/90 via-transparent to-transparent flex items-end p-sm">
+<div class="flex items-center gap-sm text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-error" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<span class="font-label-sm text-label-sm font-mono tracking-wide">40.7128° N, 74.0060° W</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Contacts Notified -->
+<div class="bg-surface-container-lowest rounded-xl p-md shadow-sm border border-error/20">
+<h2 class="font-label-md text-label-md text-on-surface-variant mb-md flex items-center">
+<span class="material-symbols-outlined text-[18px] mr-sm">group</span> 
+                    Notifying Contacts
+                </h2>
+<div class="flex flex-col gap-sm">
+<!-- Contact Item -->
+<div class="flex items-center gap-md p-sm bg-surface rounded-lg">
+<div class="w-10 h-10 rounded-full bg-error-container text-on-error-container flex items-center justify-center font-title-md text-title-md">
+                            A
+                        </div>
+<div class="flex-1">
+<p class="font-label-md text-label-md text-on-surface">Alex Johnson</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Primary Caregiver</p>
+</div>
+<div class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-container">
+<span class="material-symbols-outlined text-outline-variant text-[20px] animate-spin">sync</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions Footer -->
+<footer class="flex gap-md shrink-0 w-full max-w-md mx-auto pt-sm">
+<button class="flex-1 bg-surface-container-lowest text-on-surface border border-outline-variant font-label-md text-label-md py-lg px-md rounded-xl flex flex-col items-center justify-center gap-sm shadow-sm hover:bg-surface-variant active:bg-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[24px]">close</span> 
+                Cancel Alert
+            </button>
+<button class="flex-1 bg-on-error-container text-on-error font-label-md text-label-md py-lg px-md rounded-xl flex flex-col items-center justify-center gap-sm shadow-md hover:bg-error active:bg-error/80 transition-colors">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">call</span> 
+                Call 911
+            </button>
+</footer>
+</main>
+<script>
+        // Simple logic for the Hold-to-Trigger SOS button visual effect
+        const sosButton = document.getElementById('sosButton');
+        const progressRing = document.getElementById('progressRing');
+        const instructionText = document.getElementById('instructionText');
+        
+        let holdTimer;
+        let progress = 0;
+        const totalHoldTime = 3000; // 3 seconds
+        const updateInterval = 50; // Update every 50ms
+        const maxOffset = 295;
+        
+        const resetProgress = () => {
+            clearInterval(holdTimer);
+            progress = 0;
+            progressRing.style.strokeDashoffset = maxOffset;
+            sosButton.classList.remove('scale-[0.97]');
+            instructionText.innerText = "Press and hold for 3 seconds";
+            instructionText.classList.remove('text-error');
+        };
+
+        const startProgress = () => {
+            sosButton.classList.add('scale-[0.97]');
+            instructionText.innerText = "Holding...";
+            
+            holdTimer = setInterval(() => {
+                progress += updateInterval;
+                const percentage = Math.min(progress / totalHoldTime, 1);
+                const offset = maxOffset - (percentage * maxOffset);
+                progressRing.style.strokeDashoffset = offset;
+
+                if (progress >= totalHoldTime) {
+                    clearInterval(holdTimer);
+                    triggerSOS();
+                }
+            }, updateInterval);
+        };
+
+        const triggerSOS = () => {
+            instructionText.innerText = "SOS TRIGGERED!";
+            instructionText.classList.add('text-error', 'font-bold');
+            // Flash effect on body
+            document.body.classList.add('bg-error');
+            setTimeout(() => document.body.classList.remove('bg-error'), 200);
+            setTimeout(() => document.body.classList.add('bg-error'), 400);
+            setTimeout(() => document.body.classList.remove('bg-error'), 600);
+        };
+
+        // Mouse events
+        sosButton.addEventListener('mousedown', startProgress);
+        sosButton.addEventListener('mouseup', resetProgress);
+        sosButton.addEventListener('mouseleave', resetProgress);
+
+        // Touch events
+        sosButton.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevent scroll/zoom while holding
+            startProgress();
+        });
+        sosButton.addEventListener('touchend', resetProgress);
+        sosButton.addEventListener('touchcancel', resetProgress);
+    </script>
+</body></html>

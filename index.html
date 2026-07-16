@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediAlert</title>
+  <!-- Google Material Symbols -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="stylesheet" href="/explorer.css">
+  <style>
+    /* Custom override styles for the simplified shell */
+    .main-explorer {
+      height: 100vh;
+      width: 100vw;
+    }
+    .control-header {
+      height: 64px;
+      padding: 0 24px;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+    .preview-canvas {
+      height: calc(100vh - 64px);
+      padding: 0;
+      overflow: hidden;
+      background-color: var(--bg-primary);
+    }
+    .preview-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* Top Navigation Tabs */
+    .top-navigation {
+      display: flex;
+      gap: 6px;
+      background-color: var(--bg-primary);
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-color);
+      transition: background-color var(--transition), border-color var(--transition);
+    }
+    .nav-tab {
+      background: none;
+      border: none;
+      padding: 6px 16px;
+      border-radius: calc(var(--radius-sm) - 2px);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-hover);
+    }
+    .nav-tab.active {
+      background-color: var(--bg-secondary);
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-tab .material-symbols-outlined {
+      font-size: 18px;
+    }
+
+    /* Chatbot Modal Styles (Vanilla CSS) */
+    .chatbot-modal {
+      position: fixed;
+      bottom: 80px;
+      right: 24px;
+      width: 380px;
+      height: 480px;
+      background-color: var(--bg-secondary);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .chatbot-modal.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .chat-header {
+      background-color: var(--primary);
+      color: white;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chat-header button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px;
+      border-radius: 50%;
+    }
+    .chat-header button:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    .chat-messages {
+      flex-grow: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg-row {
+      display: flex;
+      width: 100%;
+    }
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+    .msg-row.assistant {
+      justify-content: flex-start;
+    }
+    .msg-bubble {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.4;
+      box-shadow: var(--shadow-sm);
+    }
+    .msg-row.user .msg-bubble {
+      background-color: var(--primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .msg-row.assistant .msg-bubble {
+      background-color: var(--bg-hover);
+      color: var(--text-primary);
+      border-bottom-left-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    .chat-input-area {
+      padding: 12px;
+      border-top: 1px solid var(--border-color);
+      background-color: var(--bg-primary);
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex-grow: 1;
+      border: 1px solid var(--border-color);
+      background-color: var(--bg-secondary);
+      color: var(--text-primary);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    .chat-input:focus {
+      border-color: var(--primary);
+    }
+    .chat-send-btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+    .chat-send-btn:hover {
+      opacity: 0.9;
+    }
+    .chat-send-btn .material-symbols-outlined {
+      font-size: 18px;
+    }
+
+    /* Notification Drawer Styles */
+    .notif-drawer {
+      position: fixed;
+      top: 64px;
+      right: -360px;
+      width: 350px;
+      height: calc(100vh - 64px);
+      background-color: var(--bg-secondary);
+      border-left: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s ease;
+    }
+    .notif-drawer.open {
+      right: 0;
+    }
+    .notif-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--bg-secondary);
+    }
+    .notif-header h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .clear-all-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .clear-all-btn:hover {
+      text-decoration: underline;
+    }
+    .notif-list {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .notif-item {
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: opacity 0.2s;
+      cursor: pointer;
+    }
+    .notif-item.read {
+      opacity: 0.65;
+    }
+    .notif-item-title {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-primary);
+    }
+    .notif-item-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .notif-item-time {
+      font-size: 10px;
+      color: var(--text-secondary);
+      align-self: flex-end;
+      margin-top: 4px;
+    }
+    .notif-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--text-secondary);
+      font-size: 14px;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="main-explorer">
+    <!-- Header -->
+    <header class="control-header">
+      <div class="active-screen-info" style="flex-direction: row; align-items: center; gap: 10px;">
+        <span class="material-symbols-outlined" style="font-size: 28px; color: #ba1a1a; font-variation-settings: 'FILL' 1;">medical_services</span>
+        <h1 class="active-screen-title" style="font-size: 20px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px;">MediAlert</h1>
+      </div>
+
+      <!-- Top Navigation Menu -->
+      <nav class="top-navigation" id="top-nav-menu">
+        <button class="nav-tab active" data-page="dashboard" onclick="setAppPage('dashboard')">
+          <span class="material-symbols-outlined">home</span>
+          <span>Home</span>
+        </button>
+        <button class="nav-tab" data-page="medication_list" onclick="setAppPage('medication_list')">
+          <span class="material-symbols-outlined">medication</span>
+          <span>Medication</span>
+        </button>
+        <button class="nav-tab" data-page="health_statistics" onclick="setAppPage('health_statistics')">
+          <span class="material-symbols-outlined">monitor_heart</span>
+          <span>Health</span>
+        </button>
+        <button class="nav-tab" data-page="user_profile" onclick="setAppPage('user_profile')">
+          <span class="material-symbols-outlined">person</span>
+          <span>Profile</span>
+        </button>
+      </nav>
+
+      <div class="controls-group" style="display: flex; align-items: center; gap: 12px;">
+        <!-- Chatbot Button -->
+        <button class="theme-btn" id="chatbot-toggle-btn" onclick="toggleChatbot()" title="Open Chatbot Assistant">
+          <span class="material-symbols-outlined">chat</span>
+        </button>
+        
+        <!-- Notifications Button -->
+        <button class="theme-btn" id="notifications-toggle-btn" onclick="toggleNotifications()" title="Notifications" style="position: relative;">
+          <span class="material-symbols-outlined">notifications</span>
+          <span id="notif-badge" style="position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background-color: #ba1a1a; border-radius: 50%; display: none;"></span>
+        </button>
+
+        <button class="theme-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
+          <span class="material-symbols-outlined">dark_mode</span>
+        </button>
+        
+        <!-- User Avatar -->
+        <div id="user-avatar-container" onclick="setAppPage('user_profile')" style="cursor: pointer; width: 32px; height: 32px; border-radius: 50%; overflow: hidden; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCglkHeA0BZcApOentkO9hppIMAiKRTR71RbWTwW463w2xBu3jL3hnKDvXp6vmaiBtvM2R9gVblLzisJaoCzOPYSlaFJDfvT-T5S8NQkJPnD-t2aae21F_8xMHH3QlDobXMbdud878-_80Ivp2JOXfZ7M6gDH6-nj8VXG3MJrrtFw4WLC_7M-03pt-Rd6cm9Or_HQ8WGJJshpr-1DM_POAR_wco6VpIBVT0UwVAGqkLMgAL1OH7Z1Uy" style="width: 100%; height: 100%; object-fit: cover;" alt="User Avatar">
+        </div>
+      </div>
+    </header>
+
+    <!-- App Viewport -->
+    <div class="preview-canvas">
+      <iframe id="preview-iframe" class="preview-iframe" src="/dashboard/code.html"></iframe>
+    </div>
+
+    <!-- Chatbot Modal -->
+    <div id="chatbot-modal" class="chatbot-modal">
+      <div class="chat-header">
+        <h3>
+          <span class="material-symbols-outlined">chat</span>
+          <span>MediAlert Assistant</span>
+        </h3>
+        <button onclick="toggleChatbot()">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div id="chat-messages" class="chat-messages">
+        <div class="msg-row assistant">
+          <div class="msg-bubble">
+            Hello! I am your MediAlert Assistant. How can I help you today?
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" class="chat-input" placeholder="Type your health question..." onkeydown="if(event.key === 'Enter') sendChatMessage()">
+        <button class="chat-send-btn" onclick="sendChatMessage()">
+          <span class="material-symbols-outlined">send</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Notifications Drawer -->
+    <div id="notif-drawer" class="notif-drawer">
+      <div class="notif-header">
+        <h3>Notifications</h3>
+        <button class="clear-all-btn" onclick="clearAllNotifications()">Clear All</button>
+      </div>
+      <div id="notif-list" class="notif-list">
+        <div class="notif-empty">
+          <span class="material-symbols-outlined" style="font-size: 36px;">notifications_off</span>
+          <span>No notifications yet</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script type="module">
+    let theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('.material-symbols-outlined');
+    themeIcon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+
+    themeToggle.addEventListener('click', () => {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+      themeIcon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+      
+      syncIframeTheme();
+    });
+
+    function syncIframeTheme() {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        try {
+          const doc = iframe.contentDocument || iframe.contentWindow.document;
+          if (doc && doc.documentElement) {
+            doc.documentElement.setAttribute('data-theme', theme);
+            doc.documentElement.className = theme === 'dark' ? 'dark' : 'light';
+          }
+        } catch (e) {
+          // Ignore cross-origin error
+        }
+      }
+    }
+
+    // Switch iframe source when clicking a tab
+    window.setAppPage = function(pageId) {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe) {
+        iframe.src = `/${pageId}/code.html`;
+        
+        // Highlight active tab
+        const tabs = document.querySelectorAll('.nav-tab');
+        tabs.forEach(tab => {
+          const isActive = tab.getAttribute('data-page') === pageId;
+          tab.classList.toggle('active', isActive);
+        });
+      }
+    };
+
+    // Automatically sync active tab based on iframe location path
+    function syncActiveTab() {
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentWindow) {
+        try {
+          const url = iframe.contentWindow.location.pathname;
+          const tabs = document.querySelectorAll('.nav-tab');
+          tabs.forEach(tab => {
+            const page = tab.getAttribute('data-page');
+            if (url.includes(page)) {
+              tabs.forEach(t => t.classList.remove('active'));
+              tab.classList.add('active');
+            }
+          });
+        } catch (e) {
+          // Ignore cross-origin error
+        }
+      }
+    }
+
+    // Chatbot Modal Toggle
+    window.toggleChatbot = function() {
+      const modal = document.getElementById('chatbot-modal');
+      modal.classList.toggle('visible');
+      if (modal.classList.contains('visible')) {
+        document.getElementById('chat-input').focus();
+      }
+    };
+
+    // Chatbot Logic
+    const messagesContainer = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+
+    window.sendChatMessage = function() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      
+      appendMessage(text, 'user');
+      chatInput.value = '';
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      setTimeout(() => {
+        let reply = "I am here to help you manage your health. For detailed medical questions, please consult your doctor.";
+        const query = text.toLowerCase();
+        if (query.includes('heart') || query.includes('rate') || query.includes('pulse')) {
+          reply = "Your heart rate was last recorded at 72 BPM, which is in the normal resting range (60-100 BPM).";
+        } else if (query.includes('bp') || query.includes('blood pressure') || query.includes('hypertension')) {
+          reply = "Your latest blood pressure reading is 120/80 mmHg, which is optimal.";
+        } else if (query.includes('medication') || query.includes('medicine') || query.includes('dose') || query.includes('pill')) {
+          reply = "You have 3 medications scheduled for today. Metformin is next at 1:00 PM.";
+        } else if (query.includes('sleep')) {
+          reply = "Your sleep average this week is 7h 15m. Try to sleep 15 mins earlier tonight to meet your 7.5h goal.";
+        }
+        appendMessage(reply, 'assistant');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      }, 800);
+    };
+
+    function appendMessage(text, sender) {
+      const msgRow = document.createElement('div');
+      msgRow.className = `msg-row ${sender}`;
+      msgRow.innerHTML = `
+        <div class="msg-bubble">
+          ${text}
+        </div>
+      `;
+      messagesContainer.appendChild(msgRow);
+    }
+
+    // Notification Drawer Toggle
+    window.toggleNotifications = function() {
+      const drawer = document.getElementById('notif-drawer');
+      drawer.classList.toggle('open');
+      if (drawer.classList.contains('open')) {
+        loadNotifications();
+        document.getElementById('notif-badge').style.display = 'none';
+      }
+    };
+
+    // Load Notifications
+    const defaultNotifs = [
+      { id: 1, title: "Medication Scheduled", message: "Reminder: Take Metformin 500mg at 8:00 PM.", is_read: false, created_at: new Date().toISOString() },
+      { id: 2, title: "Heart Rate Alert", message: "Your heart rate reached 95 BPM during walking.", is_read: true, created_at: new Date(Date.now() - 3600000).toISOString() }
+    ];
+
+    window.loadNotifications = function() {
+      const list = document.getElementById('notif-list');
+      let notifs = JSON.parse(localStorage.getItem('notifications'));
+      if (notifs === null) {
+        notifs = defaultNotifs;
+        localStorage.setItem('notifications', JSON.stringify(notifs));
+      }
+      
+      if (notifs.length === 0) {
+        list.innerHTML = `
+          <div class="notif-empty">
+            <span class="material-symbols-outlined" style="font-size: 36px;">notifications_off</span>
+            <span>No notifications yet</span>
+          </div>
+        `;
+        return;
+      }
+      
+      list.innerHTML = notifs.map(n => `
+        <div class="notif-item ${n.is_read ? 'read' : ''}" onclick="markNotifAsRead(${n.id})">
+          <div class="notif-item-title">${n.title}</div>
+          <div class="notif-item-desc">${n.message}</div>
+          <div class="notif-item-time">${new Date(n.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+        </div>
+      `).join('');
+      
+      const hasUnread = notifs.some(n => !n.is_read);
+      document.getElementById('notif-badge').style.display = hasUnread ? 'block' : 'none';
+    };
+
+    window.markNotifAsRead = function(id) {
+      let notifs = JSON.parse(localStorage.getItem('notifications')) || defaultNotifs;
+      notifs = notifs.map(n => n.id === id ? { ...n, is_read: true } : n);
+      localStorage.setItem('notifications', JSON.stringify(notifs));
+      loadNotifications();
+    };
+
+    window.clearAllNotifications = function() {
+      localStorage.setItem('notifications', JSON.stringify([]));
+      loadNotifications();
+    };
+
+    // Auth State Routing & Router Guard
+    window.authChanged = function() {
+      const token = localStorage.getItem('careconnect_token');
+      const topNav = document.getElementById('top-nav-menu');
+      const chatbotBtn = document.getElementById('chatbot-toggle-btn');
+      const notifBtn = document.getElementById('notifications-toggle-btn');
+      const avatar = document.getElementById('user-avatar-container');
+      const iframe = document.getElementById('preview-iframe');
+      
+      if (!token) {
+        // User is logged out: hide nav tabs and action items
+        if (topNav) topNav.style.display = 'none';
+        if (chatbotBtn) chatbotBtn.style.display = 'none';
+        if (notifBtn) notifBtn.style.display = 'none';
+        if (avatar) avatar.style.display = 'none';
+        
+        // Hide open side panels
+        const chatModal = document.getElementById('chatbot-modal');
+        if (chatModal) chatModal.classList.remove('visible');
+        const notifDrawer = document.getElementById('notif-drawer');
+        if (notifDrawer) notifDrawer.classList.remove('open');
+
+        // Route iframe to login if not already there
+        try {
+          const path = iframe.contentWindow.location.pathname;
+          if (!path.includes('login') && !path.includes('register')) {
+            iframe.src = '/login/code.html';
+          }
+        } catch(e) {
+          iframe.src = '/login/code.html';
+        }
+      } else {
+        // User is logged in: show nav tabs and action items
+        if (topNav) topNav.style.display = '';
+        if (chatbotBtn) chatbotBtn.style.display = '';
+        if (notifBtn) notifBtn.style.display = '';
+        if (avatar) avatar.style.display = '';
+
+        // Redirect from login/register back to app if token is present
+        try {
+          const path = iframe.contentWindow.location.pathname;
+          if (path.includes('login') || path.includes('register')) {
+            iframe.src = '/dashboard/code.html';
+          }
+        } catch(e) {
+          iframe.src = '/dashboard/code.html';
+        }
+      }
+    };
+
+    // Load initially to set badge & check auth
+    loadNotifications();
+    authChanged();
+
+    const iframe = document.getElementById('preview-iframe');
+    iframe.addEventListener('load', () => {
+      syncIframeTheme();
+      syncActiveTab();
+      authChanged(); // Run auth check whenever iframe changes to guard routes
+    });
+  </script>
+</body>
+</html>
